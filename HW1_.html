@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/6ca253113b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="shortcut icon" type="image/png" href="https://img.shoplineapp.com/media/image_clips/5d26e27532f26a001dc752b8/original.png?1562829429">
+    <title>黃阿瑪的後宮生活｜Fumeancats 官方網站</title>
+    
+
+    <style>
+        *{
+            /* margin: 0;
+            padding: 0; */
+            text-decoration: none;
+            color: #000; 
+            font-family: "andy-money", system-ui, "-apple-system", "Segoe UI", "Roboto", "Ubuntu", "Cantarell", "Noto Sans", "Noto Sans TC", "Noto Sans SC", "sans-serif";
+        }
+        body{
+            width: 960px;
+            margin: auto;
+        }
+        .header{
+            width: 960px;
+            height: 100px;
+            /* margin: auto; */
+            position: relative;
+            position: fixed;
+            
+            background-color:rgba(255, 255, 255, 0.85);
+            z-index: 99999;
+        }
+        .header img{
+            width: 50px;
+            position: absolute;
+            left: 10px;
+            top: 20px;
+
+        }
+        .header ul{
+            margin-top: 10px;
+            height: 30px;
+            padding-top: 5px;
+            display: flex;
+            justify-content: flex-end;
+            /* position: relative; */
+        }
+        .header nav a{
+            font-size: 16px;
+            color: black;
+            text-decoration: none;
+            display: inline-block;
+            padding: 10px;
+            margin: 5px 10px 0px 0px;
+        }
+        .header nav i:hover, .header nav a:hover{
+            color: gray;
+        }
+        .list {
+            display: flex;
+            margin: auto;
+            justify-content:center;
+        }
+        .list a{
+            display: inline-block;
+            padding: 10px;
+        }
+        .list a:hover{
+            color: #fdd000;
+        }
+
+        .banner{
+            width: 960px;
+            margin: auto;
+        }
+        .banner img{
+            margin-top: 100px;
+            width: 100%;
+        }
+        h2{
+            font-size: 28px;
+            color: gray;
+            padding: 0 0 20px;
+            /* position: relative; */
+            text-align: center;
+            margin-top: 20px;
+        }
+        .products{
+            width: 960px;
+            display: flex; 
+            flex-direction: row; 
+            flex-wrap: wrap;
+            margin: 20px auto 80px;
+            /* padding: 0 20px 0; */
+            text-align: center;
+            font-size: 14px;
+        }
+        .item{
+            display: block;
+            width:230px;
+            margin: 5px;
+            padding: 0 10px 0;
+            position: relative;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        .item img{
+            width: 100%;
+        }
+        .item h3{
+            font-size: 18px;
+            /* height: 67px; */
+            padding: 10px;
+        }
+        .price a{
+            font-size: 16px;
+            color:#fdd000;
+            text-align: center;
+        }
+        .normal{
+            color:gray;
+            text-decoration: line-through;
+            font-size: 14px;
+        }
+        /*  */
+        .img-box {
+            position: relative;
+        }
+
+        .item:hover .buy-area {
+            background-color: rgba(0, 0, 0, .5);
+        }
+
+        .item .buy-area {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            transition: 0.3s;
+            background-color: rgb(0, 0, 0, 0);
+            cursor: pointer;
+        }
+
+        .item:hover .buy-area button {
+            display: block;
+        }
+
+        .buy-area button {
+            margin-bottom: 10px;
+            background-color: #fff;
+            border: none;
+            border-radius: 3px;
+            height: 40px;
+            width: 170px;
+
+            cursor: pointer;
+            transition: .8s;
+            display: none;
+        }
+
+        .buy-area button:hover {
+            background-color:#fdd000;
+        }
+
+        .page{
+            font-size: 16px;
+            text-align: center;
+            margin: 60px 0;
+        }
+        .end{
+            display: flex;
+            font-size: 20px;
+
+        }
+        .info, .contact
+        {
+            margin: auto;
+        }
+        .info a, .contact a,.contact p{
+            display: block;
+            margin:10px;
+        }
+        .footer
+        {
+            width: 100%;
+            text-align: center;
+            background-color: #eee;
+            color: black;
+            font-size: 14px;
+            padding: 30px 0;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="header">
+        <a href="#" class="logo"><img src="https://img.shoplineapp.com/media/image_clips/60877c91e67283002f8ab371/original.png?1619491985" alt="黃阿瑪的後宮生活"></a>
+    <nav>
+        <ul>
+            <li><a href="#"><i class="fas fa-globe"></i>繁體中文</a></li>
+            <li><a href="#"><i class="fas fa-search"></i></a></li>
+            <li><a href="#"><i class="fas fa-comment"></i></a></li>
+            <li><a href="#"><i class="fas fa-user"></i></a></li>
+            <li> <a href="#"><i class="fas fa-shopping-bag"></i></a></li>
+        </ul>
+    </nav>
+    
+    <div class="right">
+        <ul class="list">
+            <li><a href="#">首頁</a></li>
+            <li><a href="#">品牌故事</a></li>
+            <li><a href="#">所有商品</a></li>
+            <li><a href="#">居家生活</a></li>
+            <li><a href="#">玩具公仔</a></li>
+            <li><a href="#">瑪瑪書店</a></li>
+            <li><a href="#">手機周邊</a></li>
+            <li><a href="#">不想運動運動會</a></li>
+            <li><a href="#">Socles黑漆漆生日館</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<div class="banner">
+    <img src="https://shoplineimg.com/5cf4a5bd4956340001e08e0d/5f857648b648ed003b55720f/1500x.webp?source_format=jpg">
+</div>
+
+<h2>新品上市</h2>
+<div class="products">
+        
+    <div class="item">
+        <!-- <div style="width: 100%" class="img-box"> -->
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>黃阿瑪的後宮生活《等我回家的你》隨機送後宮出遊趣明信片</h3>
+        <p class="price"><a href="#">NT$277</a></p>
+        <p class="normal"><a href="#">NT$350</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>後宮氣球總動員 客制化手機殼 (三款材質可選 支援多型號)</h3>
+        <p class="price"><a href="#">NT$399~NT$499</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>後宮娃娃機款 客制化手機殼 (三款材質可選 支援多型號)</h3>
+        <p class="price"><a href="#">NT$399~NT$499</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>SOSO獨家款安全帽</h3>
+        <p class="price"><a href="#">NT$999</a></p>
+        <p class="normal"><a href="#">NT$1200</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>追風阿瑪(夜光版)安全帽</h3>
+        <p class="price"><a href="#">NT$2440</a></p>
+        <p class="normal"><a href="#">NT$2600</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>後宮歡樂派對安全帽</h3>
+        <p class="price"><a href="#">NT$1800</a></p>
+        <p class="normal"><a href="#">NT$2000</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>後宮娃娃機款 客制化手機殼 (三款材質可選 支援多型號)</h3>
+        <p class="price"><a href="#">NT$399~NT$499</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>SOSO獨家款安全帽</h3>
+        <p class="price"><a href="#">NT$999</a></p>
+        <p class="normal"><a href="#">NT$1200</a></p>
+    </div>
+</div>
+<div class="page">
+    <ul>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#"><i class="fas fa-angle-double-right"></i></a>
+    </ul>
+</div>
+
+
+</div>
+<h2>不想運動運動會</h2>
+<div class="products">
+    <div class="item">
+        <!-- <div style="width: 100%" class="img-box"> -->
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>黃阿瑪的後宮生活《等我回家的你》隨機送後宮出遊趣明信片</h3>
+        <p class="price"><a href="#">NT$277</a></p>
+        <p class="normal"><a href="#">NT$350</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>後宮氣球總動員 客制化手機殼 (三款材質可選 支援多型號)</h3>
+        <p class="price"><a href="#">NT$399~NT$499</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>後宮娃娃機款 客制化手機殼 (三款材質可選 支援多型號)</h3>
+        <p class="price"><a href="#">NT$399~NT$499</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>SOSO獨家款安全帽</h3>
+        <p class="price"><a href="#">NT$999</a></p>
+        <p class="normal"><a href="#">NT$1200</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>追風阿瑪(夜光版)安全帽</h3>
+        <p class="price"><a href="#">NT$2440</a></p>
+        <p class="normal"><a href="#">NT$2600</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>後宮歡樂派對安全帽</h3>
+        <p class="price"><a href="#">NT$1800</a></p>
+        <p class="normal"><a href="#">NT$2000</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>後宮娃娃機款 客制化手機殼 (三款材質可選 支援多型號)</h3>
+        <p class="price"><a href="#">NT$399~NT$499</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>SOSO獨家款安全帽</h3>
+        <p class="price"><a href="#">NT$999</a></p>
+        <p class="normal"><a href="#">NT$1200</a></p>
+    </div>
+</div>
+<div class="page">
+    <ul>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#"><i class="fas fa-angle-double-right"></i></a>
+    </ul>
+</div>
+
+
+</div>
+<h2>CreASEnse客制化手機殼</h2>
+<div class="products">
+    <div class="item">
+        <!-- <div style="width: 100%" class="img-box"> -->
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>黃阿瑪的後宮生活《等我回家的你》隨機送後宮出遊趣明信片</h3>
+        <p class="price"><a href="#">NT$277</a></p>
+        <p class="normal"><a href="#">NT$350</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>後宮氣球總動員 客制化手機殼 (三款材質可選 支援多型號)</h3>
+        <p class="price"><a href="#">NT$399~NT$499</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>後宮娃娃機款 客制化手機殼 (三款材質可選 支援多型號)</h3>
+        <p class="price"><a href="#">NT$399~NT$499</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>SOSO獨家款安全帽</h3>
+        <p class="price"><a href="#">NT$999</a></p>
+        <p class="normal"><a href="#">NT$1200</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>追風阿瑪(夜光版)安全帽</h3>
+        <p class="price"><a href="#">NT$2440</a></p>
+        <p class="normal"><a href="#">NT$2600</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>後宮歡樂派對安全帽</h3>
+        <p class="price"><a href="#">NT$1800</a></p>
+        <p class="normal"><a href="#">NT$2000</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>後宮娃娃機款 客制化手機殼 (三款材質可選 支援多型號)</h3>
+        <p class="price"><a href="#">NT$399~NT$499</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>SOSO獨家款安全帽</h3>
+        <p class="price"><a href="#">NT$999</a></p>
+        <p class="normal"><a href="#">NT$1200</a></p>
+    </div>
+</div>
+<div class="page">
+    <ul>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#"><i class="fas fa-angle-double-right"></i></a>
+    </ul>
+</div>
+
+</div>
+<h2>聯名寢具</h2>
+<div class="products">
+    <div class="item">
+        <!-- <div style="width: 100%" class="img-box"> -->
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>黃阿瑪的後宮生活《等我回家的你》隨機送後宮出遊趣明信片</h3>
+        <p class="price"><a href="#">NT$277</a></p>
+        <p class="normal"><a href="#">NT$350</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>後宮氣球總動員 客制化手機殼 (三款材質可選 支援多型號)</h3>
+        <p class="price"><a href="#">NT$399~NT$499</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>後宮娃娃機款 客制化手機殼 (三款材質可選 支援多型號)</h3>
+        <p class="price"><a href="#">NT$399~NT$499</a></p>
+    </div>
+    <div class="item">
+        <div class="img-box">
+            <img style="width: 100%" src="https://picsum.photos/300/200?random=1" alt="">
+            <div class="buy-area">
+                <button class="buy-btn">加入購物車</button>
+            </div>
+        </div>
+        <h3>SOSO獨家款安全帽</h3>
+        <p class="price"><a href="#">NT$999</a></p>
+        <p class="normal"><a href="#">NT$1200</a></p>
+    </div>
+</div>
+<div class="page">
+    <ul>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#"><i class="fas fa-angle-double-right"></i></a>
+    </ul>
+</div>
+
+<div class="end">
+    <div class="info">
+        <h4><strong>相關資訊</strong></h4>
+        <a href="#">品牌故事</a>
+        <a href="#">退貨退款須知</a>
+        <a href="#">會員招募</a>
+        <a href="#">常見問題</a>
+        <a href="#">反詐騙公告</a>
+    </div>
+    <div class="contact">
+        <h4><strong>聯繫我們</strong></h4>
+        <p>服務時間：週一至週五 10:00-18:30</p>
+        <a href="#">LINE@閒聊區(只有阿瑪在，小幫手不在)</a>
+        <p>客服信箱 ：fumeanstore@gmail.com</p>
+        <p>授權合作信箱 ：fumeanstudio@gmail.com</p>
+        <p><strong>批發合作信箱 ：fumeancats@gmail.com</strong></p>
+    </div>
+</div>
+
+<div class="footer">
+    黃阿瑪的後宮生活&copy;  2019 FUMEANCATS .All Rights Reserved.;
+    <p><a href="https://www.fumeanstore.com/">◎copy from here</a></p>
+</div>
+    
+</body>
+</html>

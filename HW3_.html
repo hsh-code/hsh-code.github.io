@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <title>Document</title>
+    <style>
+        * {
+            font-family: 微軟正黑體;
+            margin: 0;
+            padding: 0;
+            /* outline: 1px solid red; */
+        }
+        .wrap{
+            width: 960px;
+            height: 812px;
+            margin: auto;
+            margin-bottom: 75px;
+            position: relative;
+        }
+        .space{
+            width: 500px;
+            height: 400px;
+            background-color: rgb(223, 223, 223);
+            position:absolute;
+            top:5%;
+            right: 0;
+            z-index: -3;
+        }
+        .item1 img,.item2 img{
+            position: absolute;
+            margin: 120px;
+            z-index: -2;
+            right: 0;
+        }
+
+        .ytlink{
+            position: absolute;
+            right:-10px;
+            top:20%;
+        }
+        .title h2 {
+            line-height: 120px;
+            font-size: 60px;
+            width: 355px;
+            height: 120px;
+            background-color: rgb(165, 22, 22);
+            color:white;
+        }
+        .title h3 {
+            font-size: 28px;
+            width: 355px;
+            padding: 20px 20px 0;
+
+            box-sizing: border-box;
+            background-color:black;
+            color:white;
+            box-sizing: border-box;
+        }
+        .title p {
+            padding:20px;
+            width: 355px;
+            line-height: 1.5;
+            box-sizing: border-box;
+            background-color:black;
+            color: white;
+            letter-spacing: 5px;
+        }
+        /* 靠右 */
+        .wrapeven {
+           display: flex;
+           flex-direction: row-reverse;
+           flex-wrap: wrap;
+        }
+        /* .wrapeven .space{
+            left:0;
+        } */
+
+        .wrapeven .ytlink img{
+            margin-right: 760px;
+        }
+
+        .con{
+            width:682px ;
+            background-color: rgb(209, 209, 209);
+            font-weight: bolder;
+            margin: 200px 0 0 50px;
+            z-index: 3;
+            padding:20px 25px;
+        }
+        .con h3{
+            font-size: 20px;
+            color:rgb(165, 22, 22);
+            line-height: normal;
+            display: flex;
+            white-space:nowrap;
+        }
+        .con h3::after{
+            content: "";
+            width: 100%;
+            height: 1px;
+            display: inline-block;
+            background-color:rgb(165, 22, 22);
+            margin-top:15px;
+        }
+
+        .con h5{
+            padding: 5px 10px;
+            margin: 10px 0;
+            
+            display: inline-block;
+            background-color: #000;
+            color:#fff;
+            
+        }
+        .con p{
+            line-height: 1.3;
+            margin: 0 0 10px 0;
+        }
+        .con p::before{
+            content: "";
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            background-color: rgb(165, 22, 22);
+            margin: auto auto 3px -10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+        <div class="item1">
+            <a href="#"><img src="https://www.toyota.com.tw/asset/img/tech_tnga/advantage-1-video-button-bg.png?9e068d9b"></a>
+            <div class="ytlink"><a href="#"><img src="https://www.toyota.com.tw/asset/img/tech_tnga/m/video-icon.png?5070e642" alt=""></a></div>
+            <div class="title">
+                <h2>01 操控樂趣</h2>
+                <h3>人人滿意的駕駛體驗</h3>
+                <p>透過最佳重量分配，實現平順起步、直線穩定加速，過彎同時保持車身平穩，帶給駕駛更靈敏的道路反饋，享受隨心馳聘的行駛快感。</p>
+            </div>
+            <div class="con">
+                <h3>因為我們做了這些革新</h3>
+                <h5>低重心設計</h5>
+                <p> 透過低重心設計,不僅呈現更低伏的外觀,更能減少車身側傾,保持高速行駛穩定性。</p>
+                <h5>車體剛性強化</h5>
+                <p> 車身結構採用超高強度鋼材,提高車輛穩定性,同時藉由雷射強化焊接技術,大幅增加焊點數量,提升車身抗扭剛性,強化駕駛穩定性及安全性。</p>
+                <h5>四輪獨立懸吊</h5>
+                <p> 搭載全新四輪獨立懸吊設定,透過懸吊的高承載強度,保持輪胎抓地力,同時兼顧轉向靈敏度與清晰路感回饋,提升駕駛樂趣。</p>
+            </div>
+            <!-- <div class="space"></div> -->
+        </div>
+    </div>
+    
+    <div class="wrap">
+        <div class="wrapeven">
+        <div class="item2">
+                <a href="#"><img clas="_img" src="https://www.toyota.com.tw/asset/img/tech_tnga/advantage-2-video-button-bg.png?af18d668"></a>
+                <div class="ytlink"><a href="#"><img src="https://www.toyota.com.tw/asset/img/tech_tnga/m/video-icon.png?5070e642" alt=""></a></div>
+                <div class="title">
+                    <h2>02 安全守護</h2> 
+                    
+                        <h3>行車更安心的高剛性車體</h3>
+                        <p>您的愛車會妥善保護您，強悍穩固的車身可使您安全無虞。世界級的安全功能讓您輕鬆自如享受旅程、毫無後顧之憂</p>
+                    </div>
+                </div>
+                <div class="con">
+                    <h3>因為我們做了這些革新</h3>
+                    <h5>低重心設計</h5>
+                    <p> 透過低重心設計,不僅呈現更低伏的外觀,更能減少車身側傾,保持高速行駛穩定性。</p>
+                    <h5>車體剛性強化</h5>
+                    <p> 車身結構採用超高強度鋼材,提高車輛穩定性,同時藉由雷射強化焊接技術,大幅增加焊點數量,提升車身抗扭剛性,強化駕駛穩定性及安全性。</p>
+                    <h5>四輪獨立懸吊</h5>
+                    <p> 搭載全新四輪獨立懸吊設定,透過懸吊的高承載強度,保持輪胎抓地力,同時兼顧轉向靈敏度與清晰路感回饋,提升駕駛樂趣。</p>
+                </div>
+                <!-- <div class="space"></div> -->
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="item1">
+            <a href="#"><img src="https://www.toyota.com.tw/asset/img/tech_tnga/advantage-3-video-button-bg.png?705545c7"></a>
+            <div class="ytlink"><a href="#"><img src="https://www.toyota.com.tw/asset/img/tech_tnga/m/video-icon.png?5070e642" alt=""></a></div>
+            <div class="title">
+                <h2>03 乘坐舒適</h2>
+                <h3>令人放鬆的車室空間</h3>
+                <p>車室空間設計著重人體工學，透過方向盤、踏板等位置優化，追求更舒適的駕駛位置，並以新型座椅設計，提高座椅包覆性，致力實現長途駕駛不疲勞的舒適駕馭體驗。</p>
+        </div>
+        <div class="con">
+                <h3>因為我們做了這些革新</h3>
+                <h5><span>低重心設計</span></h5>
+                <p> 透過低重心設計,不僅呈現更低伏的外觀,更能減少車身側傾,保持高速行駛穩定性。</p>
+                <h5>車體剛性強化</span></h3>
+                <p> 車身結構採用超高強度鋼材,提高車輛穩定性,同時藉由雷射強化焊接技術,大幅增加焊點數量,提升車身抗扭剛性,強化駕駛穩定性及安全性。</p>
+                <h5>四輪獨立懸吊</span></h3>
+                <p> 搭載全新四輪獨立懸吊設定,透過懸吊的高承載強度,保持輪胎抓地力,同時兼顧轉向靈敏度與清晰路感回饋,提升駕駛樂趣。</p>
+        </div>
+        <!-- <div class="space"></div> -->
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,532 @@
+* {
+  font-family: 'Noto Sans JP', 'Noto Sans', 'Open Sans', 'Roboto', sans-serif;
+  text-decoration: none;
+  list-style: none;
+  color: black;
+}
+
+body {
+  min-width: 280px;
+}
+
+/* banner */
+.banner .banner_info {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: hidden;
+}
+
+.banner .banner_info > img {
+  -webkit-animation: banner 8s ease-in infinite alternate;
+          animation: banner 8s ease-in infinite alternate;
+}
+
+@-webkit-keyframes banner {
+  0% {
+    -webkit-transform: scale(2, 2);
+            transform: scale(2, 2);
+  }
+  100% {
+    -webkit-transform: scale(1.2, 1.2);
+            transform: scale(1.2, 1.2);
+  }
+}
+
+@keyframes banner {
+  0% {
+    -webkit-transform: scale(2, 2);
+            transform: scale(2, 2);
+  }
+  100% {
+    -webkit-transform: scale(1.2, 1.2);
+            transform: scale(1.2, 1.2);
+  }
+}
+
+.banner .banner_info .banner_text {
+  padding: 10px 10px;
+  position: absolute;
+  left: 20px;
+  bottom: 20%;
+}
+
+.banner .banner_info .banner_text .slogan {
+  color: white;
+  font-size: 50px;
+  font-weight: bolder;
+  line-height: 1.2;
+}
+
+.banner .banner_info .banner_text .slogan_text {
+  color: white;
+  font-size: 14px;
+  font-weight: bolder;
+  line-height: 1.2;
+}
+
+.banner .banner_info .banner_text .banner_download .link * {
+  color: white;
+}
+
+.banner .banner_info .banner_text .banner_download .link .pc li {
+  display: none;
+}
+
+.banner .banner_info .banner_text .banner_download .link .only-mobile {
+  margin-top: 20px;
+}
+
+.banner .banner_info .banner_text .banner_download .link .only-mobile button {
+  width: 150px;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 15px;
+  border: 1px solid #CDCDCD;
+}
+
+.banner .banner_info .banner_text .banner_download .link .only-mobile button a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.banner .banner_info .banner_text .banner_download .link .only-mobile button a img {
+  width: 20px;
+  height: 20px;
+  padding: 0 5px;
+}
+
+.headerforpc {
+  display: none;
+}
+
+.headerformb {
+  font-size: 15px;
+  font-weight: bolder;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 10px;
+  position: relative;
+}
+
+.headerformb .logo {
+  position: absolute;
+  top: -280px;
+}
+
+.headerformb .logo a {
+  color: white;
+  font-weight: bolder;
+}
+
+.headerformb .language {
+  position: absolute;
+  top: -280px;
+  right: 20px;
+}
+
+.headerformb .language * {
+  color: white;
+  font-weight: bolder;
+  white-space: nowrap;
+}
+
+.headerformb nav {
+  min-width: 280px;
+  margin: 0 auto;
+}
+
+.headerformb nav .outline {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.headerformb nav .outline li:first-child {
+  border-bottom: black solid 2px;
+}
+
+.headerformb nav .outline a {
+  display: block;
+  padding: 20px 0;
+  margin: 0 20px;
+  white-space: nowrap;
+}
+
+.lifeonline {
+  margin-top: 100px;
+}
+
+.lifeonline .product_title {
+  width: 100%;
+  display: none;
+}
+
+.lifeonline .pdborder {
+  border-left: rgba(30, 30, 30, 0.3) dotted 1.5px;
+  margin-left: 20px;
+}
+
+.lifeonline .product {
+  margin-left: -48px;
+}
+
+.lifeonline .product .product_con .product_pic {
+  display: none;
+}
+
+.lifeonline .product .product_con .product_pic_formb img {
+  width: 100%;
+}
+
+.lifeonline .product .product_con .product_txt_con {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.lifeonline .product .product_con .product_txt_con .link-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+}
+
+.lifeonline .product .product_con .product_txt_con .link-icon img {
+  margin: 10px 20px;
+}
+
+.lifeonline .product .product_con .product_txt_con .product_txt {
+  margin-top: 20px;
+  padding: 0 40px;
+}
+
+.lifeonline .product .product_con .product_txt_con .product_txt h4 {
+  display: block;
+  font-size: 22px;
+  font-weight: bolder;
+  margin-bottom: 15px;
+  line-height: 1.182;
+  color: #1e1e1e;
+}
+
+.lifeonline .product .product_con .product_txt_con .product_txt h5 {
+  font-size: 18px;
+  font-weight: bolder;
+  color: #07b53b;
+  margin-bottom: 12px;
+  line-height: 1.56;
+}
+
+.lifeonline .product .product_con .product_txt_con .product_txt p {
+  color: #777;
+  line-height: 1.7;
+  margin-bottom: 60px;
+  font-size: 18px;
+}
+
+.lifeonline .product .product_con .product_txt_con .product_txt .download button {
+  display: inline-block;
+  line-height: 3;
+  padding: 0 22px 0 25px;
+  font-size: 20px;
+  white-space: nowrap;
+}
+
+.bgcolor {
+  background-color: #f7f8f9;
+}
+
+.software_info {
+  padding: 80px 20px;
+}
+
+.software_info h2 {
+  font-size: 40px;
+  color: #1e1e1e;
+  font-weight: bolder;
+  text-align: center;
+  margin: 0 0 20px;
+}
+
+.software_info p {
+  line-height: 1.7;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.software_con {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.software_con .item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.software_con .item img {
+  width: 100%;
+}
+
+.software_con .item h4 {
+  font-size: 22px;
+  font-weight: bolder;
+  text-align: center;
+  margin-top: 20px;
+  line-height: 1.182;
+  color: #1e1e1e;
+}
+
+.software_con .item p {
+  margin: 36px auto 12px;
+  text-align: center;
+  color: #777;
+  line-height: 1.7;
+  margin-bottom: 60px;
+}
+
+.bannertwo {
+  background-image: url("/line_pic/businessbanner.png");
+  background-size: cover;
+  height: 140px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 70px 0 80px;
+}
+
+.bannertwo a {
+  color: white;
+  font-weight: bolder;
+  font-size: 28px;
+}
+
+.service .title h2 {
+  font-size: 30px;
+  color: #1e1e1e;
+  font-weight: bolder;
+  text-align: center;
+  margin: 0 0 20px;
+}
+
+.service .servicelist .sidebar ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  overflow: scroll;
+  overflow-y: hidden;
+}
+
+.service .servicelist .sidebar ul li {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
+.service .servicelist .sidebar ul li button {
+  background-color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 7px 13px;
+  border: 1px solid #CDCDCD;
+  border-radius: 18px;
+}
+
+.service .servicelist .sidebar ul li:first-child button {
+  background-color: #00c300;
+  border-color: #00c300;
+  color: white;
+}
+
+.service .service_cont {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 40px;
+}
+
+.service .service_cont .app {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-bottom: 40px;
+  padding: 0 40px;
+}
+
+.service .service_cont .app img {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+}
+
+.service .service_cont .app .itemdetail {
+  margin-left: 20px;
+}
+
+.service .service_cont .app .itemdetail h3 {
+  font-size: 16px;
+  font-weight: bolder;
+  line-height: 1.2;
+  margin: 10px 0 4px;
+}
+
+.service .service_cont .app .itemdetail p {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.service .service_cont .app .itemdetail i {
+  display: none;
+  color: #BDBCBD;
+}
+
+.service .service_cont .app .app_download {
+  display: none;
+}
+
+footer {
+  margin-top: 40px;
+  margin-left: 20px;
+}
+
+footer * {
+  font-weight: bolder;
+}
+
+footer .downloadlist {
+  display: none;
+}
+
+footer .footer_con {
+  position: relative;
+}
+
+footer .footer_con > a:last-of-type {
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+
+footer .footer_con > a:last-of-type:hover::after {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+footer .footer_con > a:last-of-type::after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-right: grey solid 1px;
+  border-top: grey solid 1px;
+  -webkit-transform: rotate(135deg);
+          transform: rotate(135deg);
+  margin-left: 10px;
+}
+
+footer .footer_con .footerlist {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+footer .footer_con .footerlist li a {
+  font-size: 14px;
+  padding: 5px;
+  line-height: 3;
+}
+
+footer .footer_con .footerlist li:not(:last-child)::after {
+  content: "";
+  border-left: grey solid 1px;
+}
+
+footer .footer_con .linkout img {
+  width: 25px;
+  height: 24px;
+}
+
+footer .lineAcount {
+  margin-top: 25px;
+  margin-bottom: 80px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+footer .lineAcount img {
+  width: 25px;
+  height: 24px;
+  border-radius: 8px;
+}
+
+footer .lineAcount a {
+  padding: 0 5px;
+  color: gray;
+  font-weight: normal;
+}
+
+footer .lineAcountforpc {
+  display: none;
+}
+/*# sourceMappingURL=HW2-3_style.css.map */

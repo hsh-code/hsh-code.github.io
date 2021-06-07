@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <title>title</title>
+</head>
+<body>
+    <div>
+        <h1 class="text-center my-3 pt-3">台灣水庫即時水情</h1>
+    </div>
+    <div id="container" class="text-center"></div>
+
+    <script>
+        let Titles = ['區域','水庫名稱','有效蓄水量(萬立方公尺)','剩餘百分比(%)'];
+        let ReserviorArray = [
+            {area:'北部',name:'新山水庫(基隆)',capacity:901.48,percent:89.9},
+            {area:'北部',name:'翡翠水庫(台北、新北)',capacity:28220.84,percent:84.1},
+            {area:'北部',name:'石門水庫(新北、桃園、新竹)',capacity:5413.72,percent:26.7},
+            {area:'北部',name:'永和山水庫(新竹、苗栗)',capacity:464.41,percent:15.4},
+            {area:'北部',name:'寶山水庫(新竹)',capacity:128.57,percent:25.5},
+            {area:'中部',name:'德基水庫(台中)',capacity:2130.85,percent:11.4},
+            {area:'中部',name:'石岡壩(台中)',capacity:106.18,percent:71.1},
+            {area:'中部',name:'日月潭水庫(南投)',capacity:6044.89,percent:47.2},
+            {area:'中部',name:'霧社水庫(南投)',capacity:2023.83,percent:53.9},
+            {area:'中部',name:'湖山水庫(雲林、彰化、嘉義)',capacity:2426.02,percent:47.7},
+            {area:'南部',name:'白河水庫(台南)',capacity:0,percent:0},
+            {area:'南部',name:'曾文水庫(嘉義、台南)',capacity:6609.00,percent:12.9},
+            {area:'南部',name:'烏山頭水庫(台南)',capacity:4760.00,percent:60.5},
+            {area:'南部',name:'南化水庫(台南、高雄)',capacity:3756.27,percent:41.2},
+            {area:'南部',name:'阿公店水庫(高雄)',capacity:567.00,percent:37.1},
+            {area:'南部',name:'牡丹水庫(屏東)',capacity:838.00,percent:31.6},
+        ];
+
+        let container =document.getElementById("container");
+        let table=document.createElement("table");
+        table.setAttribute("class", "table table-bordered table-striped table-secondary");
+        let thead=document.createElement("thead");
+        thead.setAttribute("class","thead table-dark")
+        let tbody=document.createElement("tbody");
+
+        window.onload = function () {
+            CreateTable(Titles,ReserviorArray);
+            container.appendChild(table);
+        }
+
+        function CreateTable(titlesArray,rowsArray){
+            //建thead
+            AddRow(thead,titlesArray);
+
+            //建tbody
+            rowsArray.forEach(function(item){
+                    let values=Object.values(item);
+                    AddRow(tbody,values); 
+                })
+        }
+
+        function AddRow(target,rowData){
+            let _row = document.createElement("tr");
+
+            rowData.forEach(function(col){
+                let td=document.createElement("td");
+                let tdText=document.createTextNode(col);
+                td.appendChild(tdText);
+                _row.appendChild(td);//創建td
+            });
+            target.appendChild(_row);//建thead或tbody
+            table.appendChild(target);
+        }
+
+    </script>
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    -->
+</body>
+</html>

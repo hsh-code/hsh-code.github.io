@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-price=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <title>BuyApple</title>
+    <style>
+        img{
+            width: 90%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="container header mt-2">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <button class='btn btn-dark m-2'>Mac</button>
+                <button class='btn btn-dark m-2'>iPhone</button>
+                <button class='btn btn-dark m-2'>Watch</button>
+            </div>
+        </div>
+    </div>
+    <div class="container main">
+        <div class="row">
+            <div class="col-12 col-md-6 productImg d-flex justify-content-center">
+                <img src="" alt="">
+            </div>
+            <div class="col-12 col-md-6 left-side">
+                <div class="color"></div>
+                <div class="spec"></div>
+                <div class="price">
+                    <h2></h2>
+                    <h3></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+        var Product = [
+            {
+                Detail: {
+                    productName: 'MacPro 13',
+                    baseImgUrl: 'https://www.apple.com/tw/macbook-pro/images/overview/hero_mbp__fsgedw8koju6_medium_2x.jpg'
+                },
+                OutWard: [
+                    { color: '太空灰色', colorValue: '#6e6969', imageUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-space-select-201911_GEO_TW?wid=904&hei=840&fmt=jpeg&qlt=80&.v=1573165435411' },
+                    { color: '銀色', colorValue: '#b9aeae', imageUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-silver-select-201911_GEO_TW?wid=904&hei=840&fmt=jpeg&qlt=80&.v=1573153623825' }
+                ],
+                Spec: {
+                    Storage: [
+                        { size: '256GB', price: 51300 },
+                        { size: '512GB', price: 57300 },
+                        { size: '1TB', price: 63300 },
+                        { size: '2TB', price: 75300 }
+                    ]
+                }
+            },
+            {
+                Detail: {
+                    productName: 'iPhone 11',
+                    baseImgUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone11-select-2019-family?wid=882&hei=1058&fmt=jpeg&qlt=80&.v=1567022175704'
+                },
+                OutWard: [
+                    { color: '紅色', colorValue: '#AE0000', imageUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone11-red-select-2019?wid=940&hei=1112&fmt=png-alpha&.v=1566956144763' },
+                    { color: '白色', colorValue: '#F0F0F0', imageUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone11-white-select-2019?wid=940&hei=1112&fmt=png-alpha&.v=1566956148115' },
+                    { color: '黑色', colorValue: '#272727', imageUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone11-black-select-2019?wid=940&hei=1112&fmt=png-alpha&.v=1566956144418' }
+                ],
+                Spec: {
+                    Storage: [
+                        { size: '64GB', price: 24900 },
+                        { size: '128GB', price: 26900 },
+                        { size: '256GB', price: 30400 }
+                    ]
+                }
+            },
+            {
+                Detail:{
+                    productName: 'Apple Watch',
+                    baseImgUrl: 'https://www.apple.com/tw/watch/home/images/overview/se/tile-watch-se__knji2d25x8qe_medium_2x.jpg'
+                },
+                OutWard:[
+                    {color:'藍色', colorValue:'#003060', imageUrl:'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MJFV3_VW_34FR+watch-40-titanium-dark-cell-edition6s_VW_34FR_WF_CO_GEO_TW?wid=1400&hei=1400&trim=1,0&fmt=p-jpg&qlt=95&.v=1617228544000,1601930582000'},
+                    {color:'墨綠色', colorValue:'#5B5B00', imageUrl:'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MY6K2ref_VW_34FR+watch-40-titanium-dark-cell-edition6s_VW_34FR_WF_CO_GEO_TW?wid=1400&hei=1400&trim=1,0&fmt=p-jpg&qlt=95&.v=1611115428000,1601930582000'},
+                    {color:'褐色', colorValue:'#9F5000', imageUrl:'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MXAF2ref_VW_34FR+watch-44-titanium-light-cell-edition6s_VW_34FR_WF_CO_GEO_TW?wid=1400&hei=1400&trim=1,0&fmt=p-jpg&qlt=95&.v=1611165372000,1601930885000'}
+                ],
+                Spec:{
+                    Storage:[
+                        {size:'44mm',price:24900},
+                        {size:'44mm',price:26400},
+                        {size:'44mm',price:27900}
+                    ]
+                }
+            }
+        ];
+        
+//         Product.forEach(p=>{
+    
+//     p.OutWard.forEach(colorItem=>{
+//         console.log(colorItem.color)
+        
+//         colorItem.colorValue;
+//     });
+// });
+        
+
+        var allBtn = document.querySelectorAll('button');
+        var productImg = document.querySelector('.productImg');
+        var colorArea = document.querySelector('.color');
+        var specArea = document.querySelector('.spec');
+        var priceArea = document.querySelector('.price');
+
+        allBtn.forEach((e,index)=>{
+            e.addEventListener('click',()=>{
+                //初始化
+                productImg.innerText='';
+                colorArea.textContent='';
+                specArea.textContent='';
+                // priceArea.textContent='';
+                //載入圖片
+                var img = document.createElement('img');
+                img.setAttribute('src',Product[index].Detail.baseImgUrl);
+                img.classList.add('mt-5');
+                productImg.appendChild(img);
+                
+                //顏色按鈕
+                // var colorTitle =document.createElement('div');
+                var colorTitleh1 = document.createElement('h2');
+                colorArea.appendChild(colorTitleh1);
+                colorTitleh1.textContent='顏色';
+
+                let colorObjAry = Product[index].OutWard;
+                let div = document.createElement('div');
+                //console.log(colorItem)
+                colorObjAry.forEach(colorObj=>{
+                    var colorBtn = document.createElement('button');
+                    colorBtn.classList.add('btn');
+                    colorBtn.classList.add('btn-white');
+                    colorBtn.classList.add('border');
+                    colorBtn.classList.add('border-dark');
+                    colorBtn.classList.add('mx-2')
+                    
+                    colorArea.appendChild(div);
+                    div.appendChild(colorBtn);
+                    colorBtn.innerHTML+=colorObj.color;
+                    //console.log(colorBtn)
+                    //加入色碼到按鈕
+                    let colorItem= document.createElement('div');
+                    div.classList.add('row')
+                    
+                    colorItem.style.width='50px'
+                    colorItem.style.height='50px'
+                    colorItem.classList.add('rounded-circle');
+                    colorItem.style.backgroundColor=`${colorObj.colorValue}`;
+                    
+                    colorObj.colorValue
+                    colorBtn.appendChild(colorItem);
+                    // console.log(colorBtn)
+                    
+                    //點顏色按鈕換圖片
+                    colorBtn.addEventListener('click',()=>{
+                        //"換"img
+                        productImg.innerHTML=`<img src="${colorObj.imageUrl}">`;
+                    })
+                })
+                
+                //規格+價錢按鈕
+                specArea.classList.add('overflow-scroll');
+                var specTitleh1 = document.createElement('h2');
+                // var priceTitleh1 =document.createElement('h2');
+                specArea.appendChild(specTitleh1);
+                specTitleh1.textContent='規格';
+                specTitleh1.classList.add('my-2');
+                // priceArea.appendChild(priceTitleh1);
+                let priceh2=document.querySelector('.price h2');
+                console.log(priceh2)
+                priceh2.textContent='價格';
+                // priceTitleh1.classList.add('my-2');
+
+                let specObj = Product[index].Spec.Storage;
+                //console.log(specObj)
+                specObj.forEach(specItem=>{
+                    let specBtn = document.createElement('button');
+                    
+                    specBtn.textContent=specItem.size;
+                    specArea.appendChild(specBtn);
+                    specBtn.classList.add('btn');
+                    specBtn.classList.add('btn-white');
+                    specBtn.classList.add('border');
+                    specBtn.classList.add('border-dark');
+                    specBtn.classList.add('mx-2');
+
+                    specBtn.addEventListener('click',x=>{
+                        // let priceTitle = document.createElement('h3');
+                        // priceArea.appendChild(priceTitle);
+                        let priceh3 = document.querySelector('.price>h3')
+                        priceh3.innerHTML=` NT ${specItem.price}`;
+                        priceArea.classList.add('my-2');
+                    })
+                })
+
+            })
+        });
+
+    </script>
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    -->
+</body>
+</html>

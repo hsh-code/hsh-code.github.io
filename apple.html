@@ -12,6 +12,12 @@
             width: 90%;
             object-fit: contain;
         }
+        .row{
+            margin-left: 1px;
+        }
+        .spec{
+            margin-right: 1px;
+        }
     </style>
 </head>
 <body>
@@ -30,9 +36,9 @@
                 <img src="" alt="">
             </div>
             <div class="col-12 col-md-6 left-side">
-                <div class="color"></div>
-                <div class="spec"></div>
-                <div class="price">
+                <div class="color my-4"></div>
+                <div class="spec my-4"></div>
+                <div class="price my-4">
                     <h2></h2>
                     <h3></h3>
                 </div>
@@ -100,14 +106,6 @@
             }
         ];
         
-//         Product.forEach(p=>{
-    
-//     p.OutWard.forEach(colorItem=>{
-//         console.log(colorItem.color)
-        
-//         colorItem.colorValue;
-//     });
-// });
         
 
         var allBtn = document.querySelectorAll('button');
@@ -122,7 +120,7 @@
                 productImg.innerText='';
                 colorArea.textContent='';
                 specArea.textContent='';
-                // priceArea.textContent='';
+                priceArea.textContent='';
                 //載入圖片
                 var img = document.createElement('img');
                 img.setAttribute('src',Product[index].Detail.baseImgUrl);
@@ -130,7 +128,6 @@
                 productImg.appendChild(img);
                 
                 //顏色按鈕
-                // var colorTitle =document.createElement('div');
                 var colorTitleh1 = document.createElement('h2');
                 colorArea.appendChild(colorTitleh1);
                 colorTitleh1.textContent='顏色';
@@ -144,7 +141,7 @@
                     colorBtn.classList.add('btn-white');
                     colorBtn.classList.add('border');
                     colorBtn.classList.add('border-dark');
-                    colorBtn.classList.add('mx-2')
+                    colorBtn.classList.add('ml-2')
                     
                     colorArea.appendChild(div);
                     div.appendChild(colorBtn);
@@ -173,15 +170,16 @@
                 //規格+價錢按鈕
                 specArea.classList.add('overflow-scroll');
                 var specTitleh1 = document.createElement('h2');
-                // var priceTitleh1 =document.createElement('h2');
+                var priceTitleh1 =document.createElement('h2');
+
                 specArea.appendChild(specTitleh1);
                 specTitleh1.textContent='規格';
                 specTitleh1.classList.add('my-2');
-                // priceArea.appendChild(priceTitleh1);
-                let priceh2=document.querySelector('.price h2');
-                console.log(priceh2)
-                priceh2.textContent='價格';
-                // priceTitleh1.classList.add('my-2');
+
+                priceArea.appendChild(priceTitleh1);
+                // let priceh2=document.querySelector('.price h2');
+                priceTitleh1.textContent='價格';
+                priceTitleh1.classList.add('my-2');
 
                 let specObj = Product[index].Spec.Storage;
                 //console.log(specObj)
@@ -194,13 +192,15 @@
                     specBtn.classList.add('btn-white');
                     specBtn.classList.add('border');
                     specBtn.classList.add('border-dark');
-                    specBtn.classList.add('mx-2');
+                    specBtn.classList.add('ml-2');
 
                     specBtn.addEventListener('click',x=>{
-                        // let priceTitle = document.createElement('h3');
-                        // priceArea.appendChild(priceTitle);
-                        let priceh3 = document.querySelector('.price>h3')
-                        priceh3.innerHTML=` NT ${specItem.price}`;
+                        // let priceTitleh3 = document.createElement('h3');
+                        // priceArea.appendChild(priceTitleh3);
+
+                        // let priceh3 = document.querySelector('.price h3')
+                        // priceTitleh3.innerHTML='';
+                        priceArea.innerHTML=` <h2>價格</h2> <h3>NT ${specItem.price}</h3>`;
                         priceArea.classList.add('my-2');
                     })
                 })

@@ -131,7 +131,7 @@
         //判斷重複
         function Isrepeat(input){
             let array = input.split('');
-            return array.some((x,index)=>x==array.sort()[index+1])
+            return array.sort().some((x,index)=>x==array.sort()[index+1])
         }
         //重置
         function Reset(){

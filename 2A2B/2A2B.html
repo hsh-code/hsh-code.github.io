@@ -4,24 +4,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="./bootstrap.min.css">
-    <link rel="stylesheet" href="./bootstrap-theme.css">
+    <link rel="stylesheet" href="./助教/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="./助教/stylesheets/bootstrap-theme.css">
+    
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"  -->
+<!-- integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> -->
     <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/3888/3888576.png">
 
     <title>猜猜猜</title>
     <style>
         body{
-            background: #fff url("http://img.yao51.com/jiankangtuku/qwhessctx.jpeg") top fixed no-repeat;
+            /* background: #fff url("http://img.yao51.com/jiankangtuku/qwhessctx.jpeg") top fixed no-repeat; */
             /* background-position: top; */
-            background-size: contain;
+            /* background-size: contain; */
             
         }
         .gameborder{
+            padding: 20px;
             position: absolute;
             left: 15%;
             top:10%;
             width: 800px;
-            height: 350px;
+            min-height: 350px;
+            border: black solid 1px;
+            border-radius: 8px;
         }
         #game_result{
             margin-top: 10px;
@@ -34,8 +40,9 @@
             display: flex;
             flex-direction: column;
         }
-        .output_result p{
-            /* word-wrap: none; */
+        .output_result span{
+           background-color: red;
+           margin-x: 10px;
         }
         .userGuess:hover{
             content: '請先按下開始';
@@ -62,38 +69,6 @@
                         <a id="cheat" type="button" class="btn btn-default">看答案</a>
                         </div>
                         <br>
-                        <ul id="guessResults" class="list-group">
-                        <li class="list-group-item">
-                        <span class="label label-danger">0A1B</span>
-                        <!--<span class="badge">0A1B</span>-->
-                        1234
-                        </li>
-                        <li class="list-group-item">
-                        <span class="label label-danger">0A3B</span>
-                        <!--<span class="badge">0A3B</span>-->
-                        3456
-                        </li>
-                        <li class="list-group-item">
-                        <span class="label label-danger">0A2B</span>
-                        <!--<span class="badge">0A2B</span>-->
-                        4567
-                        </li>
-                        <li class="list-group-item">
-                        <span class="label label-danger">2A0B</span>
-                        <!--<span class="badge">2A0B</span>-->
-                        6089
-                        </li>
-                        <li class="list-group-item">
-                        <span class="label label-danger">3A0B</span>
-                        <!--<span class="badge">3A0B</span>-->
-                        6345
-                        </li>
-                        <li class="list-group-item">
-                        <span class="label label-success">4A0B</span>
-                        <!--<span class="badge badge-success">4A0B</span>-->
-                        6385
-                        </li>
-                        </ul>
                         <div class="input-group">
                             <span class="input-group-addon" id="sizing-addon1">猜答案</span>
                             <input id="userGuess" type="text" name="" class="form-control" value="請先按下開始" required="required" maxlength="4" >
@@ -101,9 +76,9 @@
                             <a id="guess" type="button" class="btn btn-default" onclick="CheckAnswer()" data-toggle="tooltip" title="請先按下開始">猜!</a>
                             </span>
                         </div>
-                    </div>
-                    <div class="col-5 col-sm-6 col-md-6 output_result">
-                        <p id="game_result" class="msg fs-5 text-success">您的輸入結果：</p>
+                        <div class="col-12 col-sm-12 col-md-12 output_result">
+                            <h4 id="game_result" class="msg fs-5 text-success">您的輸入結果：</h4>
+                        </div>
                     </div>
                 </div>
             </div>          
@@ -111,11 +86,11 @@
         </div>
     </div>
     <script>
+        let start = document.getElementById('start');
         let cheat =document.getElementById('cheat');
         let userGuess=document.getElementById('userGuess');
 
         window.onload=function(){
-            cheat.disabled=true;
             userGuess.disabled=true;
         }
         //隨機選4個數字
@@ -134,25 +109,30 @@
                 pool.splice(index,1);
             }
             answer = answerArray.toString().replace(/,/g, "");
-            console.log(answer);
-            // document.getElementById("start").disabled=false;
+            start.classList.remove('btn-primary');
+            start.disabled=true;
             document.getElementById("userGuess").disabled=false;
             userGuess.value='';
             alert('您總共有10次遊戲機會!');
-
+            console.log(answer)
         }
         //看答案
         cheat.addEventListener('click',x=>{
-            console.log('A:'+answer)
             if(answer==''){
                 alert(`安安 你還沒按開始喔`);
             }
             else{
-                alert(`確定要暴雷嗎？`);
-                alert(`答案是：${answer}`);
+                let r=confirm(`確定要暴雷嗎？`);
+                if(r==true){
+                    confirm(`答案是：${answer}`);
+                }
             }
         })
-
+        //判斷重複
+        function Isrepeat(input){
+            let array = input.split('');
+            return array.some((x,index)=>x==array.sort()[index+1])
+        }
         //重置
         function Reset(){
             window.location.reload();
@@ -175,6 +155,10 @@
                 alert(`請勿輸入含非數字類型的答案!`);
                 _input.innerHTML='';
             }
+            else if(Isrepeat(_input.value)){
+                alert(`請勿輸入重複數字!`);
+                _input.innerHTML='';
+            }
             
             //判斷幾A幾B
             else{
@@ -187,30 +171,36 @@
                     }
                 }
                 B =intersectNum-A;
-                    console.log(`${A}A${B}B`);
+
+                //顯示幾A幾B
                 Count+=1;
-                console.log(`已猜了${Count}次`);
+                let guesstime = document.querySelector('.guesstime');
+                    //console.log(`已猜了${Count}次`);
+                let _output = document.querySelector(".output_result");
+                _result = document.createElement("h5");
+                result_badge = document.createElement('span');
+                _output.appendChild(_result);
+                _result.innerHTML+=`${_input.value}，`;
+                _result.appendChild(result_badge);
+                result_badge.innerHTML+=`${A}A${B}B`;
+                result_badge.classList.add('badge');
+                guesstime.innerHTML=`<h4>剩餘次數：${10-Count}</h4>`;
+                if(A==4){
+                    result_badge.style.backgroundColor='green';
+                    let congra = document.createElement('h3');
+                    _output.appendChild(congra);
+                    congra.innerHTML='恭喜過關!<br>遊戲將於3秒後自動重新開始~';
+                    congra.classList.add('bg-warning');
+                    setTimeout(Reset, 3000);
+                }
                 //是否過關
-                if(A!=4){
-                    let _output = document.querySelector(".output_result");
-                    _result = document.createElement("p");
-                    
-                    _output.appendChild(_result);
-                    _result.innerHTML+=`${_input.value}，${A}A${B}B<br>`;
-                    let guesstime = document.querySelector('.guesstime');
-                    // _guesspoint = document.createElement('p');
-                    // guesstime.appendChild(_guesspoint);
-                    guesstime.innerHTML=`剩餘次數：${10-Count}`;
+                else{
+                    guesstime.innerHTML=`<h4>剩餘次數：${10-Count}</h4>`;
                     if(Count>10){
                         alert("遊戲失敗!結束提示窗後將於3秒後自動重新開始~");
                         guesstime.innerHTML='';
                         setTimeout(Reset, 3000);
                     }
-                }
-                else{
-                    _result = document.createElement("p");
-                    alert("恭喜過關!結束提示窗後將於3秒後自動重新開始~");
-                    setTimeout(Reset, 3000);
                 }
             }
         }

@@ -1,0 +1,272 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-decoration: none;
+}
+
+:root {
+  width: 1280px;
+  background-color: #394264;
+  margin: auto;
+}
+
+body {
+  position: relative;
+  width: 70%;
+  margin: 0.8em auto;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #EBD6D6;
+  opacity: 0.8;
+  text-align: center;
+  border-radius: 4px;
+}
+
+nav {
+  height: 10%;
+  padding: 1em;
+}
+
+nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+nav ul li {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.2em;
+}
+
+nav ul li a {
+  color: black;
+}
+
+/*modal*/
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.content {
+  background: #E0E0E0;
+  position: relative;
+  height: auto;
+  width: 600px;
+  border-radius: 20px;
+  top: 5%;
+  margin: auto;
+  border: 2px dotted gray;
+}
+
+.content h3 {
+  margin: 0;
+  padding: 0.4em;
+  text-align: center;
+  font-size: 2.4em;
+  font-weight: 550;
+  color: #1F253D;
+  background: rgba(0, 0, 0, 0.1);
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+.content > div {
+  padding: 15px 40px 30px;
+  margin: 0;
+  font-weight: 300;
+  font-size: 1.15em;
+}
+
+.content > div p {
+  margin: 0;
+  padding: 10px 0;
+  line-height: 2em;
+  text-align: justify;
+}
+
+.content > div ul {
+  padding: 0 0 30px 20px;
+  text-align: left;
+}
+
+.content > div ul li {
+  padding: 5px 0;
+  display: block;
+  line-height: 1.5em;
+}
+
+.content > div ul li strong {
+  color: green;
+  font-weight: 700;
+}
+
+.content > div ul li:last-child {
+  margin-top: 20px;
+  font-weight: 700;
+  color: green;
+}
+
+.content > div a {
+  font-size: 0.8em;
+  background: #95a5a6;
+  color: white;
+  font-weight: 500;
+  padding: 0.5em 2em;
+  border-radius: 5px;
+}
+
+.gamescreen {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 5%;
+}
+
+.game {
+  background-color: #394264;
+  width: 350px;
+  height: 350px;
+  border-radius: 4px;
+  margin: 0 auto;
+  -webkit-box-shadow: #1a1f34 1px 1px, #1a1f34 2px 2px, #1a1f34 3px 3px, #1a1f35 4px 4px, #1a2035 5px 5px, #1b2035 6px 6px, #1b2036 7px 7px, #1b2036 8px 8px, #1b2036 9px 9px, #1b2137 10px 10px, #1b2137 11px 11px, #1c2137 12px 12px, #1c2138 13px 13px, #1c2238 14px 14px, #1c2238 15px 15px, #1c2239 16px 16px, #1d2239 17px 17px, #1d2239 18px 18px, #1d233a 19px 19px, #1d233a 20px 20px, #1d233a 21px 21px, #1d233b 22px 22px, #1e233b 23px 23px, #1e243b 24px 24px, #1e243c 25px 25px, #1e243c 26px 26px, #1e243c 27px 27px, #1f253d 28px 28px;
+          box-shadow: #1a1f34 1px 1px, #1a1f34 2px 2px, #1a1f34 3px 3px, #1a1f35 4px 4px, #1a2035 5px 5px, #1b2035 6px 6px, #1b2036 7px 7px, #1b2036 8px 8px, #1b2036 9px 9px, #1b2137 10px 10px, #1b2137 11px 11px, #1c2137 12px 12px, #1c2138 13px 13px, #1c2238 14px 14px, #1c2238 15px 15px, #1c2239 16px 16px, #1d2239 17px 17px, #1d2239 18px 18px, #1d233a 19px 19px, #1d233a 20px 20px, #1d233a 21px 21px, #1d233b 22px 22px, #1e233b 23px 23px, #1e243b 24px 24px, #1e243c 25px 25px, #1e243c 26px 26px, #1e243c 27px 27px, #1f253d 28px 28px;
+}
+
+.game h2 {
+  margin: 0 auto;
+  background: #cc324b;
+  padding: 1em 0.4em;
+  font-size: 1.5em;
+  font-weight: 400;
+  display: block;
+  line-height: 1em;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  color: #fff;
+}
+
+.game p {
+  text-align: center;
+  font-size: 1.5em;
+  padding: 0.5em;
+  margin: 0;
+}
+
+#count {
+  color: #f39c12;
+  font-weight: 700;
+  font-size: 1.5em;
+}
+
+#result {
+  margin: 0.8em;
+  height: 30%;
+  border: #D8D8EB dotted 2px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: justify;
+}
+
+#myanswer {
+  width: 240px;
+  height: 50px;
+  display: block;
+  padding: 0.8em 0;
+  margin: 0.8em auto 0;
+  background: white;
+  color: black;
+  border: solid 1px #1f253d;
+  border-radius: 4px;
+  text-align: center;
+  padding: 0.2em;
+  font-size: 1.2em;
+}
+
+#random_num {
+  width: 240px;
+  height: 50px;
+  background: #1F253D;
+  color: #95a5a6;
+  font-size: 1.2em;
+  margin: 0.8em auto;
+  padding: 0.2em;
+  border-radius: 4px;
+  border-style: none;
+}
+
+#random_num:hover {
+  -webkit-transition: 1s;
+  transition: 1s;
+  cursor: pointer;
+  background: #11a8ab;
+  color: #FFFF37;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px #11a8ab,
+ 0 0 25px #11a8ab,
+ 0 0 50px #11a8ab,
+ 0 0 100px #11a8ab;
+          box-shadow: 0 0 5px #11a8ab,
+ 0 0 25px #11a8ab,
+ 0 0 50px #11a8ab,
+ 0 0 100px #11a8ab;
+}
+
+.container {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+}
+
+.guessBox {
+  margin: 10px auto 0;
+  padding: 0.5em;
+  display: block;
+  line-height: 2em;
+  color: #fff;
+  background: #81C0C0;
+  border-radius: 15px;
+}
+
+.guessBox button {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  border-style: none;
+  background-color: #E0E0E0;
+  color: #1F253D;
+  padding: 10px;
+  margin: 10px 5px;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+.guessBox button:hover {
+  background-color: #FFFFB9;
+}
+/*# sourceMappingURL=GuessNumStyle.css.map */

@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <link rel="stylesheet" href="./bootstrap-theme.css">
+
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"  -->
+    <!-- integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> -->
+    <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/3888/3888576.png">
+
+    <title>猜猜猜</title>
+    <style>
+        #gameWrapper {
+            border: 15px solid #FFF;
+            border-radius: 5px 5px 5px 5px;
+            padding: 15px;
+            max-width: 500px;
+            margin: 5% auto;
+            text-align: center
+        }
+
+        #gameWrapper h2 {
+            white-space: nowrap;
+        }
+
+        body {
+            background: #fd746c;
+            background: linear-gradient(135deg, #ff9068 0%, #ffce63 48%, #fd746c 100%);
+        }
+
+        .gameborder {
+            padding: 20px;
+            max-width: 800px;
+            min-height: 350px;
+            border: rgba(255, 255, 255, 0.918) solid 2px;
+            border-radius: 8px;
+        }
+
+        #game_result {
+            margin-top: 10px;
+        }
+
+        .output {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .output p {}
+
+        .output_result {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .output_result span {
+            background-color: red;
+            margin: 10px;
+        }
+
+        .userGuess:hover {
+            content: '請先按下開始';
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row" id="gameWrapper">
+            <div class="col-sm-12 col-md-12">
+                <div class="container-fluid">
+                    <div class="row output">
+                        <div class="col-8 col-sm-10 col-md-12 col-lg-12">
+                            <div class="btn-group btn-group-justified">
+                                <a id="start" type="button" class="btn btn-danger RandomNum">開始遊戲</a>
+                                <a id="restart" type="button" class="btn btn-warning" onclick="Reset()
+    ">放棄重來</a>
+                                <a id="cheat" type="button" class="btn btn-primary">看答案</a>
+                            </div>
+                            <h2>GUESS THE NUMBER!</h2>
+                            <div class="input-group ">
+                                <span class="input-group-addon" id="sizing-addon1">猜答案</span>
+                                <input id="userGuess" type="text" name="" class="form-control" value="
+    請先按下開始" required="required" maxlength="4">
+                                <span class="input-group-btn">
+                                    <a id="guess" type="button" class="btn btn-default CheckAnswer"
+                                        data-toggle="tooltip" title="請先按下開始">猜!</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid gameborder">
+        <div class="row">
+            <!-- <div class="col-sm-3 col-md-2 sidebar d-flex">
+                <ul class="nav nav-sidebar">
+                </ul>
+            </div> -->
+            <div class="col-sm-12 col-sm-offset-0 col-md-12 col-md-offset-0 main">
+                <div class="container-fluid">
+                    <div class="row output">
+                        <div class="col-12 col-sm-12 col-md-12 output_result">
+                            <h4 id="game_result" class="msg" style="font-weight: bolder;">您的輸入結果：</h4>
+                        </div>
+                        <div class="col-3 col-sm-3 col-md-3 col-lg-4 d-flex">
+                            <p class='guesstime' style="background-color: whitesmoke;"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        let start = document.getElementById('start');
+        let cheat = document.getElementById('cheat');
+        let userGuess = document.getElementById('userGuess');
+
+        window.onload = function () {
+            userGuess.disabled = true;
+            RandomNum();
+            start.addEventListener('click', () => {
+                if(userGuess.disabled){
+                    alert('您總共有10次遊戲機會!');
+                }
+                else{
+                    alert('ㄎㄎ 手很賤喔~A__A')
+                    start.disabled=true;
+                }
+                userGuess.disabled = false;
+            }
+            );
+            cheat.addEventListener('click', () => {
+                if (userGuess.disabled == true) {
+                    alert(`安安 你還沒按開始喔`);
+                }
+                else {
+                    let r = confirm(`確定要暴雷嗎？`);
+                    if (r == true) {
+                        alert(`答案是：${answer}~倒數3秒離開~881~`);
+                        setTimeout(Reset, 3000);
+                    }
+                }
+            });
+            guess.addEventListener('click', CheckAnswer);
+        }
+        //隨機選4個數字
+        let answerArray = [];
+        let answer = '';
+        const fullpool = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+        let _result;
+        function RandomNum() {
+            answerArray = [];
+            let pool = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+            for (let i = 0; i < 4; i++) {
+                let index = Math.floor(Math.random() * (pool.length - 1));
+                //console.log(index);
+                answerArray.push(pool[index]);
+                //console.log(answer.push(pool[index]))
+                pool.splice(index, 1);
+            }
+            answer = answerArray.toString().replace(/,/g, "");
+            userGuess.value = '';
+            console.log(`%c嘿嘿 答案${answer}藏在這~`, 'color:red; font-size:20px')
+        }
+        //判斷重複
+        function Isrepeat(input) {
+            let array = input.split('');
+            return array.sort().some((x, index) => x == array.sort()[index + 1])
+        }
+        //重置
+        function Reset() {
+            window.location.reload();
+        }
+        //判斷
+        let Count = 0;
+        function CheckAnswer() {
+            let inputArray = userGuess.value.split('');
+            //例外
+            if (userGuess.value == '') {
+                alert(`請輸入數字!`);
+                userGuess.value = null;
+            }
+            else if (userGuess.value.length < 4) {
+                alert(`請輸入正確長度的數字!`);
+                userGuess.value = null;
+            }
+            else if (inputArray.filter(x => fullpool.indexOf(x) != -1).length != 4) {
+                alert(`請勿輸入含非數字類型的答案!`);
+                userGuess.value = null;
+            }
+            else if (Isrepeat(userGuess.value)) {
+                alert(`請勿輸入重複數字!`);
+                userGuess.value = null;
+            }
+            //判斷幾A幾B
+            else {
+                let intersectNum = answerArray.filter(x => inputArray.indexOf(x) != -1).length;
+                let A = 0;
+                let B = 0;
+                for (let j = 0; j < 4; j++) {
+                    if (answerArray[j] === inputArray[j]) {
+                        A += 1;
+                    }
+                }
+                B = intersectNum - A;
+
+                //顯示幾A幾B
+                Count += 1;
+                let guesstime = document.querySelector('.guesstime');
+                //console.log(`已猜了${Count}次`);
+                let _output = document.querySelector(".output_result");
+                _result = document.createElement("h5");
+                result_badge = document.createElement('span');
+                _output.appendChild(_result);
+                _result.innerHTML += `${userGuess.value}，`;
+                _result.appendChild(result_badge);
+                result_badge.innerHTML += `${A}A${B}B`;
+                result_badge.classList.add('badge');
+                guesstime.innerHTML = `<h4>剩餘次數：${10 - Count}</h4>`;
+                if (A == 4) {
+                    result_badge.style.backgroundColor = 'green';
+                    let congra = document.createElement('h3');
+                    _output.appendChild(congra);
+                    congra.innerHTML = '恭喜過關!<br>遊戲將於3秒後自動重新開始~';
+                    congra.classList.add('bg-warning');
+                    setTimeout(Reset, 3000);
+                }
+                //是否過關
+                else {
+                    guesstime.innerHTML = `<h4>剩餘次數：${10 - Count}</h4>`;
+                    if (Count > 10) {
+                        alert("遊戲失敗!結束提示窗後將於3秒後自動重新開始~");
+                        guesstime.innerHTML = '已超過上限次數!';
+                        setTimeout(Reset, 3000);
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

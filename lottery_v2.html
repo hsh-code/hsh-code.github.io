@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/6e3e1d59b0.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="./dish.png" type="image/x-icon">
+    
+
+    <title>巴豆么</title>
+    <style type="text/css">
+        body {
+            display: flex;
+            flex: 1;
+            min-height: 70vh;
+            align-items: center;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            /* width: 1200px; */
+            margin: auto;
+        }
+
+        #L {
+            background: #77BA99;
+            /* background:pink url("https://i.pinimg.com/originals/7d/dc/71/7ddc718b0ccd74084b5f2545e21e28cf.jpg") top fixed no-repeat; */
+            background-size: center;
+            width: 600px;
+        }
+
+        #food {
+            overflow: hidden;
+            width: 25rem;
+            height: 25rem;
+            border: gray solid 0.2rem;
+            border-radius: 100%;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #food .box {
+            position: relative;
+        }
+
+        #food .box p {
+            position: absolute;
+            width: 12.5rem;
+            height: 12.5rem;
+            right: 50%;
+            top: 0;
+            transform-origin: 100% 100%;
+            font-size: 18px;
+            display: flex;
+            flex-direction: column-reverse;
+            letter-spacing: .1em;
+            border: gray solid 0.15rem;
+        }
+
+        #food .L1 {
+            /* background-color: #C13820; */
+            transform: skew(54deg);
+        }
+
+        #food .L2 {
+            transform: rotate(36deg) skew(54deg);
+        }
+
+        #food .L3 {
+            transform: rotate(72deg) skew(54deg);
+        }
+
+        #food .L4 {
+            transform: rotate(108deg) skew(54deg);
+        }
+
+        #food .L5 {
+            transform: rotate(144deg) skew(54deg);
+        }
+
+        #food .L6 {
+            transform: rotate(180deg) skew(54deg);
+        }
+
+        #food .L7 {
+            transform: rotate(216deg) skew(54deg);
+        }
+
+        #food .L8 {
+            transform: rotate(252deg) skew(54deg);
+        }
+
+        #food .L9 {
+            transform: rotate(288deg) skew(54deg);
+        }
+
+        #food .L10 {
+            transform: rotate(324deg) skew(54deg);
+        }
+
+        #food p span {
+            transform: skew(-54deg);
+        }
+
+        .clock {
+            width: 30rem;
+            height: 30rem;
+            background-color: #fff;
+            border: 10px solid white;
+            border-radius: 100%;
+            position: relative;
+            margin: auto;
+            /* left: 33.5%; */
+            box-shadow:
+                0 0 4px black,
+                0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hand {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            /* 改 */
+            transition: .2s;
+        }
+
+        /* 指針*/
+        .hand::after {
+            content: "";
+            display: block;
+            width: .4rem;
+            height: 23%;
+            background-color: #B87070;
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            z-index: 999;
+        }
+
+        /* 圓心 */
+        .choose button {
+            background-color: #9D9D9D;
+            width: 15%;
+            height: 15%;
+            border-radius: 100%;
+            border-style: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 d-flex flex-column justify-content-center">
+            </div>
+        </div>
+        <div class="row position-relative">
+            <div class="col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center">
+                <div id="L">
+                    <h1 class="text-center my-2 justify-content-center"> <i class="fas fa-utensils"></i> 到底要吃什麼R</h1>
+                    <div class="clock">
+                        <div id="food">
+                            <div class="hand" id="hand"></div>
+                            <div class="box">
+                                <p box-id="1" class="L1"><span></span></p>
+                                <p box-id="2" class="L2"><span></span></p>
+                                <p box-id="3" class="L3"><span></span></p>
+                                <p box-id="4" class="L4"><span></span></p>
+                                <p box-id="5" class="L5"><span></span></p>
+                                <p box-id="6" class="L6"><span></span></p>
+                                <p box-id="7" class="L7"><span></span></p>
+                                <p box-id="8" class="L8"><span></span></p>
+                                <p box-id="9" class="L9"><span></span></p>
+                                <p box-id="10" class="L10"><span></span></p>
+                            </div>
+                            <!-- <ul> -->
+                            <!-- <li box-id="1" class="L1">111111</li> -->
+                            <!-- <li box-id="2" class="L2"></li> -->
+                            <!-- <li box-id="3" class="L3"></li> -->
+                            <!-- <li box-id="4" class="L4"></li> -->
+                            <!-- <li box-id="5" class="L5"></li> -->
+                            <!-- <li box-id="6" class="L6"></li> -->
+                            <!-- <li box-id="7" class="L7"></li> -->
+                            <!-- <li box-id="8" class="L8"></li> -->
+                            <!-- <li box-id="9" class="L9"></li> -->
+                            <!-- <li box-id="10" class="L10"></li> -->
+                            <!-- </ul> -->
+                        </div>
+                        <div class="choose">
+                            <button class="button text-light text-center" style="font-size: 1.8rem;">餓</button>
+                        </div>
+                        <div id="msg"></div>
+                    </div>
+                    <div class="btnArea d-flex justify-content-between">
+                        <input type="button" name="Submit2" value="點這裡分享好食" class="btn btn-secondary m-2 d-flex"
+                            onclick="window.open('https://docs.google.com/spreadsheets/d/1m7n6zNAN3FeDVWDlgvOjR9vYLjC0Woude28nkUqM5lE/edit?usp=sharing')" />
+                        <input id="show" type="button" value="有什麼餐廳呢" class="btn btn-secondary m-2"
+                            style="visibility:hidden;"></input>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="restraunt_intro" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #97CBFF;">
+                    <h5 class="modal-title font-weight-bold ">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="mt-3" style="font-size: 1.2rem;"></p>
+                    <table class="descripton mx-auto"></table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn close btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const url = 'https://spreadsheets.google.com/feeds/list/1m7n6zNAN3FeDVWDlgvOjR9vYLjC0Woude28nkUqM5lE/1/public/values?alt=json';
+        let RestrauntObject = {};
+        let RestrauntArray = [];
+        let idArray = [];
+    </script>
+
+    <script>
+        let step = 0;
+        let allsteps = 0;
+        let currentIndex = 0;
+        let speed;
+        let deg = 0;
+        let circle = 0;//指針轉幾圈
+
+        let _meals = document.querySelectorAll('[box-id]');
+        let box = document.querySelector('#box');
+        let choose = document.querySelector('.choose button')
+        let span = document.querySelectorAll('p span');
+        let p = document.querySelectorAll('p')
+        let hand = document.querySelector('.hand');
+        let title = document.querySelector('h1');
+        let msgBox = document.getElementById('msg');
+        let show = document.getElementById('show');
+        let table = document.querySelector('table');
+
+        //渲染畫面
+        window.onload = function () {
+            fetchRestraunt();
+            choose.addEventListener('click', ChooseRestraunt);
+            show.addEventListener('click', ShowRestraunt);
+        }
+
+        function fetchRestraunt() {
+            let request = new Request(url);
+            fetch(request)
+                .then(response => response.json())
+                .then(result => {
+                    // console.log(result);
+                    RestrauntObject = result.feed.entry;
+                    // console.log(RestrauntObject)
+                    DataTransformer(RestrauntObject, RestrauntArray);
+                    // console.table(RestrauntArray)
+                    getData(idArray);
+                    // console.log(RestrauntArray[1].id)
+                })
+                .catch(err => console.log('資料載入錯誤!'))
+        }
+
+        function DataTransformer(RestrauntObject, RestrauntArray) {
+            for (let index in RestrauntObject) {
+                let item = {};
+                item.id = RestrauntObject[index].gsx$id.$t;
+                item.name = RestrauntObject[index].gsx$name.$t;
+                item.tel = RestrauntObject[index].gsx$tel.$t;
+                item.address = RestrauntObject[index].gsx$address.$t;
+                item.remarks = RestrauntObject[index].gsx$remarks.$t;
+                RestrauntArray.push(item);
+
+                idArray[index] = RestrauntArray[index].id;
+            }
+            // console.log(idArray)
+            idArray = idArray.filter((element, index, arr) => arr.indexOf(element) === index)
+            // console.log(idArray)
+        }
+
+        function getData(idArray) {
+            _meals.forEach((meal, index) => {
+                span[index].innerText = idArray[index];
+            })
+        }
+
+        function ChooseRestraunt() {
+            choose.disabled = true;
+            show.style.visibility = 'hidden';
+            p[currentIndex].removeAttribute('style');
+            title.removeAttribute('style');
+            title.innerHTML = '想吃什麼呢?'
+            speed = 50;
+            let random = Math.floor(Math.random() * idArray.length) + 1;
+            steps = random + (6 * idArray.length);
+            allsteps = steps;
+            turnAround();
+        }
+
+        function turnAround() {
+            hand.style.transform = `rotate(${deg}deg)`;
+            deg = (currentIndex * 36) + (circle * 360);//改
+            currentIndex++;
+
+            if (currentIndex >= _meals.length) {
+                currentIndex = 0; //繞圈
+                circle++;//改
+            }
+            steps--;
+
+            if (steps > 0) {
+                setTimeout(turnAround, speed);
+                (steps < Math.floor(allsteps / 3)) ? speed += 7 : speed;
+            }
+            else {
+                let val = idArray[currentIndex];
+                title.style.backgroundColor = '#D0D0D0';
+                val.includes('foodpanda')?(show.style.visibility = 'hidden'):(show.style.visibility = 'visible');
+                title.innerHTML = `吃飯囉~<ins>${val}</ins>吃起來`;
+                p[currentIndex].style['box-shadow'] = '0 0 20px #ffff37';
+                p[currentIndex].style.backgroundColor = '#EBD6D6';
+                choose.disabled = false;
+            }
+        }
+
+        function ShowRestraunt(e) {
+            e.target.setAttribute('data-toggle', 'modal');
+            e.target.setAttribute('data-target', '#restraunt_intro');
+
+            let modal = document.getElementById('restraunt_intro');
+            modal.querySelector('h5').innerHTML = '';//清空
+            modal.querySelector('table').innerHTML = '';
+            modal.querySelector('h5').innerHTML = `${idArray[currentIndex]}`;
+            let _restraunt = RestrauntArray.filter(x => x.id == idArray[currentIndex]);
+            let titlesArray = ["餐廳名稱", "電話", "地址", "備註"];
+            let thead = document.createElement('thead');
+            AddRow(thead, titlesArray);
+            table.appendChild(thead);
+            thead.style.backgroundColor = 'gray';
+            thead.style.color = 'white';
+            _restraunt.forEach((item) => {
+                let tbody = document.createElement('tbody');
+                let rowsArray = [`${item.name}`, `${item.tel}`, `${item.address}`, `${item.remarks}`];
+                //console.log(rowsArray);
+                AddRow(tbody, rowsArray);
+                table.appendChild(tbody);
+            })
+        }
+
+        function AddRow(target, rowData) {
+            let _row = document.createElement("tr");
+            rowData.forEach(col => {
+                let td = document.createElement('td');
+                let tdText = document.createTextNode(col);
+                td.appendChild(tdText);
+                td.style.border = 'black solid 1px';
+                _row.appendChild(td);
+            })
+            target.appendChild(_row); //thead或tbody
+            table.appendChild(target);
+        }
+
+    </script>
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/velocity/1.1.0/velocity.min.js"></script>
+</body>
+
+</html>

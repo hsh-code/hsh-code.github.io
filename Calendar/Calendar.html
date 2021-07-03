@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="./Calendar/style_calendar.css">
+    <script src="https://kit.fontawesome.com/de0f812dc0.js" crossorigin="anonymous"></script>
+    <title>Calendar</title>
+</head>
+
+<!-- banner -->
+<div class="container-fluid p-0">
+    <div class="row d-flex flex-column">
+        <!-- <h1 id="app-name-landscape" class="my-3 p-2 text-center" contenteditable="true">行事曆</h1> -->
+        <div id="current-day-info" class="col-12 my-3 d-flex justify-content-center">
+            <h2 id="current-year" class="p-2"></h2>
+            <h1 id="cur-month" class="p-2"></h1>
+            <h1 id="cur-date" class="p-2"></h1>
+            <h1 id="cur-day" class="p-2"></h1>
+            <div class="time d-flex p-2">
+                <span></span>: <span></span>: <span></span>
+            </div>
+        </div>
+        <!-- <div class="d-flex justify-content-end">
+            <button id="theme-landscape" class="btn btn-secondary m-2">Change Theme</button>
+        </div> -->
+    </div>
+    <!-- main -->
+    <div id="calendar" class="row my-2 mx-auto">
+        <div class="col-12">
+            <h3 id="cal-year" class="text-center font-weight-bolder my-2 p-2"></h3>
+            <div class="d-flex justify-content-around align-items-center my-2">
+                <i class="fas fa-caret-left icon m-2 p-3"></i>
+                <h3 id="cal-month" class=""></h3>
+                <i class="fas fa-caret-right icon m-2 p-3"></i>
+            </div>
+            <table class="col-12 mt-1 mb-5">
+                <thead>
+                    <tr>
+                        <th class="weekday font-weight-bolder">
+                            <div>Sun</div>
+                        </th>
+                        <th class="weekday font-weight-bolder">
+                            <div>Mon</div>
+                        </th>
+                        <th class="weekday font-weight-bolder">
+                            <div>Tue</div>
+                        </th>
+                        <th class="weekday font-weight-bolder">
+                            <div>Wed</div>
+                        </th>
+                        <th class="weekday font-weight-bolder">
+                            <div>Thu</div>
+                        </th>
+                        <th class="weekday font-weight-bolder">
+                            <div>Fri</div>
+                        </th>
+                        <th class="weekday font-weight-bolder">
+                            <div>Sat</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Add -->
+<div class="modal fade" id="inputModal" tabindex="-1" role="dialog" aria-labelledby="inputModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="inputModalLabel"></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div id="input-area" class="modal-body d-flex flex-column">
+                <div class="d-flex align-items-center">
+                    <span>請選擇標記顏色：</span>
+                    <input id="todo-color" type="color">
+                </div>
+                <input id="todo-title" type="text" placeholder="標題長度請勿超過12個字" maxlength="12">
+                <input id="todo-time" type="time">
+                <textarea id="todo-item" placeholder="說明..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    onclick="SaveTodoItem()">儲存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Info -->
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="info-modal-title" id="infoModalLabel"></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div id="info-area" class="modal-body d-flex flex-column">
+                <div class="d-flex align-items-center">
+                    <span>請選擇標記顏色：</span>
+                    <input id="info-todo-color" type="color">
+                </div>
+                <input id="info-todo-title" type="text" placeholder="標題長度請勿超過12個字" maxlength="12">
+                <input id="info-todo-time" type="time">
+                <textarea id="info-todo-item" placeholder="說明..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"  data-dismiss="modal" onclick="DeleteTodoItem()">刪除</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="EditTodoItem()">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./Calendar/calendar.js"></script>
+
+</body>
+
+</html>

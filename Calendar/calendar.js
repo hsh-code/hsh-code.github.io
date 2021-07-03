@@ -130,7 +130,6 @@ function showCalenderInfo(year, month) {
 						ul.appendChild(li);
 
 						li.addEventListener('click', function (e) {
-							// document.getElementById('app-name-landscape').innerText = `${year}/${month + 1}/${e.target.childNodes[0].data}`;
 							document.getElementById('infoModalLabel').innerText = item.date;
 							document.getElementById('info-todo-color').value = item.tag;
 							document.getElementById('info-todo-title').value = item.title;
@@ -142,13 +141,6 @@ function showCalenderInfo(year, month) {
 				}
 				//新增活動
 				td.addEventListener('click', function (e) {
-					// let target;
-					// if(e.target.localName=='li' || e.target.localName=='ul' || e.target.localName=='span'){
-					// 	target = e.target.offsetParent;
-					// }
-					// else{
-					// 	target=e.target;
-					// }
 					e.stopPropagation();
 					if (e.target.nodeName === 'TD') {
 						e.preventDefault();
@@ -168,7 +160,6 @@ function showCalenderInfo(year, month) {
 }
 
 function SaveTodoItem() {
-	// let calendarName = document.getElementById('app-name-landscape').innerText;
 	let event_date = document.getElementById('inputModalLabel').innerText;
 	let todo_color = document.getElementById('todo-color').value;
 	let todo_title = document.getElementById('todo-title').value;
@@ -179,7 +170,6 @@ function SaveTodoItem() {
 		return;
 	}
 	let todoObj = {
-		// cal_name: calendarName,
 		date: event_date,
 		tag: todo_color,
 		title: todo_title,
@@ -206,7 +196,6 @@ function SaveTodoItem() {
 }
 
 function EditTodoItem() {
-	// let show_calendarName = document.getElementById('app-name-landscape').innerText;
 	let show_event_date = document.getElementById('infoModalLabel').innerText;
 	let show_todo_color = document.getElementById('info-todo-color').value;
 	let show_todo_title = document.getElementById('info-todo-title').value;

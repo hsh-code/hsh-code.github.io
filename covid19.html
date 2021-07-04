@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/de0f812dc0.js" crossorigin="anonymous"></script>
+    <!-- map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <link rel="stylesheet" href="./normalize.css">
+
+    <title>台灣各縣市個案確診統計</title>
+    <style>
+        body {
+            /* max-width: 1400px; */
+            /* margin: auto; */
+            background-color: #F2EEE5;
+        }
+
+        .container-fluid {
+            padding: 0;
+            /* margin: 0; */
+        }
+
+        .container-fluid>.row {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .banner {
+            width: 100%;
+            background-color: #D18063;
+        }
+
+        label {
+            font-weight: bolder;
+        }
+
+        .map_border {
+            /* border: 1px solid #23232324; */
+            border: 2px solid #C3E2DD;
+            border-radius: 20px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .data_border {
+            border: 2px solid #C3E2DD;
+            border-radius: 20px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .add_canvas_style {
+            width: 100%;
+            height: 100%;
+        }
+
+        .detail_border {
+            border: 2px solid #C3E2DD;
+            border-radius: 20px;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            /* min-width: 680px; */
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="col-12 banner d-flex flex-row">
+            <!-- 下拉式選單 -->
+            <div class="form-group col-6 my-3">
+                <label for="country">縣市</label>
+                <select id="country" class="form-control">
+                    <!-- option -->
+                </select>
+            </div>
+            <div class="form-group col-6 my-3">
+                <label for="district">行政區</label>
+                <select id="district" class="form-control">
+                    <!-- option -->
+                </select>
+            </div>
+        </div>
+        <div class="row mx-auto my-3">
+            <div class="col-6 p-3">
+                <div id="map" class="map_border">
+                    <!-- 地圖 -->
+                </div>
+            </div>
+            <div class="col-6 p-3">
+                <div class="row data_border">
+                    <h3 class="text-center mt-3 mx-auto">
+                        <strong>110年台灣地區個案確診統計</strong>
+                        <br><strong>(月份/人數)</strong>
+                    </h3>
+                    <div id="sick_district" class="col-12 d-flex flex-column align-items-start justify-content-start">
+                        <h3 class="w-100 text-center text-success">
+                            <strong></strong>
+                        </h3>
+                        <h4 id="secondTitle" class="text-center"></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-5 mx-auto">
+            <div class="col-11 my-3 mx-auto p-2 detail_border">
+                <h3 class="text-center my-2">
+                    <strong>詳細資料</strong>
+                </h3>
+                <table class="table sickDetail table-bordered table-striped text-center my-4 mb-5">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <table class="table sickPerson table-bordered table-striped text-center mt-5 my-4">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Aiox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"
+        integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        let x = 0;
+        let y = 0;
+        function getPosition() {
+            return new Promise((res, rej) => {
+                navigator.geolocation.watchPosition(res, rej);
+            });
+        }
+        getPosition().then(result => {
+            x = result.coords.latitude;
+            y = result.coords.longitude;
+            console.log(x, y)
+            //1.初始化地圖
+            var map = L.map('map', {
+                center: [x, y],
+                zoom: 10
+            });
+            // 2.設定圖資來源
+            var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+            var osm = new L.TileLayer(osmUrl, { minZoom: 8, maxZoom: 19 });
+            map.addLayer(osm);
+
+            //3.抓資料來源(Axios)
+            //台灣行政區域資料
+            let areaDataRequest = axios.get('https://raw.githubusercontent.com/hsh-code/FileStorage/main/%E5%8F%B0%E7%81%A3%E8%A1%8C%E6%94%BF%E5%9C%B0%E5%8D%80.json');
+            //各行政區域病例資料
+            let virusDataRequest = axios.get('https://raw.githubusercontent.com/hsh-code/FileStorage/main/%E5%9C%B0%E5%8D%80%E5%B9%B4%E9%BD%A1%E6%80%A7%E5%88%A5%E7%B5%B1%E8%A8%88%E8%A1%A8-%E5%9A%B4%E9%87%8D%E7%89%B9%E6%AE%8A%E5%82%B3%E6%9F%93%E6%80%A7%E8%82%BA%E7%82%8E-%E4%BE%9D%E5%80%8B%E6%A1%88%E7%A0%94%E5%88%A4%E6%97%A5%E7%B5%B1%E8%A8%88.json');
+
+            //4.全域變數宣告
+            let areaData; //行政區
+            let virusData; //病例
+            let sickAreaData; //行政區+病例
+
+            let markers = L.markerClusterGroup(); //marker聚集物件
+
+            let countrySelect = document.querySelector('#country');
+            let districtSelect = document.querySelector('#district');
+            function setMarker() {
+                if (markers) markers.clearLayers(); //清空markers
+                Object.keys(sickAreaData).forEach(x => {
+                    let data = sickAreaData[x];
+                    //console.log(data)
+                    let marker = L.marker([data[0].Lat, data[0].Lng]);
+                    let sick_total = data.map(x => Number(x.CaseNum)).reduce((a, b) => a + b);
+                    //console.log('sicktotal='+`${sick_total}`)
+                    marker.bindPopup(`
+                    <h4>${data[0].Country} ${data[0].Town}</h4>
+                    <p>確診案例累計人數：${sick_total}人</p>
+                    `)
+
+                    let months_data = data.groupBy('Month');
+                    //console.log(months_data)
+                    let Area_monsAry = Object.keys(months_data);
+                    //console.log(perMonAry)
+                    Object.values(months_data).forEach((month, index) => {
+                        Area_monsAry[index] += "," + month.map(x => Number(x.CaseNum)).reduce((a, b) => a + b);
+                    })
+                    //console.log(Area_monsAry)
+
+                    //自訂當按下marker時
+                    marker.addEventListener('click', function () {
+                        //副標題
+                        let secondtitle = document.querySelector('#sick_district strong:first-child');
+                        secondtitle.innerText = `${data[0].CountryTown}`;
+                        //表格-詳細資料
+                        const Month = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+                        let thead = document.querySelector('.sickDetail thead');
+                        let tbody = document.querySelector('.sickDetail tbody');
+
+                        thead.innerHTML = '';
+                        tbody.innerHTML = '';
+
+                        let MonthTr = document.createElement('tr');
+                        Month.forEach(_mon => {
+                            let Monthtd = document.createElement('td');
+                            Monthtd.innerText = _mon;
+                            MonthTr.appendChild(Monthtd);
+                        })
+                        thead.appendChild(MonthTr);
+
+                        let SickTr = document.createElement('tr');
+                        let mon = [];
+                        let sickperson = [];
+                        data.forEach((x, index) => {
+                            if (Area_monsAry[index] != null) {
+                                mon[index] = Number(Area_monsAry[index].split(',')[0]);
+                                sickperson[index] = Number(Area_monsAry[index].split(',')[1]);
+                                //console.log(mon)
+                                //console.log(sickperson)
+                            }
+                        });
+                        let index = 0;
+                        let chartDataAry = [];
+                        for (let i = 1; i < 13; i++) {
+                            if (mon[index] == i) {
+                                let td = document.createElement('td');
+                                td.innerText = sickperson[index];
+                                SickTr.appendChild(td);
+                                chartDataAry[i - 1] = sickperson[index];
+                                index++;
+                            }
+                            else {
+                                let td = document.createElement('td');
+                                td.innerText = '0';
+                                SickTr.appendChild(td);
+                                chartDataAry[i - 1] = 0;
+                            }
+                        }
+
+                        tbody.appendChild(SickTr);
+                        //console.log(chartDataAry);
+
+                        //案例資料
+                        const DetailTitle = ['確診日期', '性別', '年齡', '確診數'];
+                        let thead2 = document.querySelector('.sickPerson thead');
+                        let tbody2 = document.querySelector('.sickPerson tbody');
+                        let PersonTitleTr = document.createElement('tr');
+                        thead2.innerHTML = '';
+                        tbody2.innerHTML = '';
+                        DetailTitle.forEach(x => {
+                            let PersonTitletd = document.createElement('td');
+                            PersonTitletd.innerText = x;
+                            PersonTitleTr.appendChild(PersonTitletd);
+                        })
+                        thead2.appendChild(PersonTitleTr);
+
+                        //console.log(data)
+                        Object.values(data).forEach(x => {
+                            //console.log(x)
+                            let person_Data = [`${x.Month + '/' + x.Date}`, `${x.Sex}`, `${x.AgeRange}`, `${x.CaseNum}`];
+                            let PersonDetailTr = document.createElement('tr');
+                            //console.log(person_Data)
+                            person_Data.forEach(x => {
+                                let Persontd = document.createElement('td');
+                                Persontd.innerText = x;
+                                PersonDetailTr.appendChild(Persontd);
+                                tbody2.appendChild(PersonDetailTr);
+                            })
+                        })
+
+                        //長條圖
+                        let sick_district = document.getElementById('sick_district');
+                        let ctx = document.createElement('canvas');
+
+                        if (sick_district.querySelector('canvas') != null) { sick_district.removeChild(sick_district.querySelector('canvas')) }
+                        sick_district.appendChild(ctx);
+
+                        let dataBar = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                                datasets: [{
+                                    label: '當月確診總人數',
+                                    data: [chartDataAry[0],
+                                    chartDataAry[1],
+                                    chartDataAry[2],
+                                    chartDataAry[3],
+                                    chartDataAry[4],
+                                    chartDataAry[5],
+                                    chartDataAry[6],
+                                    chartDataAry[7],
+                                    chartDataAry[8],
+                                    chartDataAry[9],
+                                    chartDataAry[10],
+                                    chartDataAry[11]],
+                                    // backgroundColor: [
+                                    //     "#FF0000",
+                                    //     "#00FF00",
+                                    //     "#0000FF",
+                                    // ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        })
+
+                    })
+                    markers.addLayer(marker);
+                })
+                map.addLayer(markers);
+            }
+
+            window.onload = function () {
+                Promise.all([areaDataRequest, virusDataRequest])
+                    .then(res => {
+                        let [areaRes, virusRes] = res;
+                        areaData = areaRes.data;
+                        virusData = virusRes.data.filter(x => x.個案研判日.includes('2021'));
+                        //console.log(areaData)
+                        //console.log(virusData)
+
+                        sickAreaData = virusData.map(x => {
+                            let area = areaData.find(y => y.City == x.縣市 && y.District == x.鄉鎮);
+                            return {
+                                CountryTown: x.縣市 + x.鄉鎮,
+                                Country: x.縣市,
+                                Town: x.鄉鎮,
+                                Month: x.個案研判日.split('/')[1],
+                                Date: x.個案研判日.split('/')[2],
+                                Sex: x.性別,
+                                AgeRange: x.年齡層,
+                                CaseNum: x.確定病例數,
+                                abroad: x.是否為境外移入,
+                                //小防呆
+                                Lat: area != undefined ? area.Lat : undefined,
+                                Lng: area != undefined ? area.Lng : undefined
+                            }
+                        }).filter(x => x.Lat != undefined).groupBy('CountryTown');
+                        //console.log(sickAreaData)
+                        setMarker();
+
+                        //下拉選單
+                        ['---請選擇縣市---'].concat([...new Set(areaData.map(x => x.City))]).forEach(city => {
+                            let option1 = document.createElement('option');
+                            option1.innerText = city;
+                            option1.value = city;
+                            countrySelect.appendChild(option1);
+                        })
+                        let option2 = document.createElement('option');
+                        option2.value = '';
+                        option2.innerText = '---請選擇行政區---';
+                        districtSelect.appendChild(option2);
+                    })
+            }
+            countrySelect.onchange = function () {
+                //console.log(countrySelect.selectedOptions[0]);
+
+                if (countrySelect.value == '') { return }
+                else {
+                    //改變地圖焦點
+                    let country = areaData.find(x => x.City == this.value);
+                    //console.log(this.value)
+                    map.setView([country.Lat, country.Lng]);
+
+                    districtSelect.innerHTML = '';
+                    let label = document.createElement('option');
+                    label.value = '';
+                    label.innerText = '---請選擇行政區---';
+                    districtSelect.appendChild(label);
+
+                    let districts = areaData.filter(x => x.City == countrySelect.selectedOptions[0].innerText);
+                    districts.forEach(_distr => {
+                        // console.log(district.District)
+                        let option2 = document.createElement('option');
+                        option2.value = '';
+                        option2.innerText = _distr.District;
+                        districtSelect.appendChild(option2);
+                    })
+
+                    districtSelect.onchange = function () {
+                        let location = areaData.find(x => x.District == districtSelect.selectedOptions[0].innerText);
+                        //console.log(location)
+                        map.setView([location.Lat, location.Lng], 12)
+                    }
+                }
+            };
+        })
+        //array groupby方法註冊
+        Array.prototype.groupBy = function (prop) {
+            return this.reduce(function (groups, item) {
+                const val = item[prop];
+                groups[val] = groups[val] || [];
+                groups[val].push(item);
+                return groups;
+            }, {});
+        }
+    </script>
+</body>
+
+</html>

@@ -128,7 +128,7 @@ function showCalenderInfo(year, month) {
 							return firstTime>secondTime?1:-1
 						}
 					})
-					console.log(todoList)
+					console.log('Todo:'+`${todoList}`)
 					todoList.forEach(item => {
 						let li = document.createElement('li');
 						li.innerHTML = item.time + ' ' + item.title;
@@ -210,9 +210,9 @@ function EditTodoItem() {
 
 	//let todoList = [];
 	todoList = JSON.parse(localStorage.getItem(show_event_date));
-	console.log(todoList)
+	//console.log(todoList)
 	let edit_todoitem = todoList.find(x => x.date && x.time &&x.title);
-	console.dir(edit_todoitem);
+	console.dir('Edit:'+`${edit_todoitem}`);
 
 	edit_todoitem.tag = show_todo_color;
 	edit_todoitem.title = show_todo_title;

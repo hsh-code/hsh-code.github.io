@@ -21,9 +21,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-    <link rel="stylesheet" href="./normalize.css">
+    <link rel="stylesheet" href="../normalize.css">
 
-    <title>台灣各縣市個案確診統計</title>
+    <title>台灣各縣市《嚴重特殊傳染性肺炎》個案確診統計</title>
     <style>
         body {
             /* max-width: 1400px; */
@@ -78,7 +78,6 @@
             overflow-y: auto;
             /* min-width: 680px; */
         }
-
     </style>
 </head>
 
@@ -139,6 +138,10 @@
                 </table>
             </div>
         </div>
+        <footer class="d-flex justify-content-center">
+            <p>&copy; 更新日期：2021/07/04</p>
+            <a href="https://data.gov.tw/dataset/120711">&ensp;◎Reference Link</a>
+        </footer>
     </div>
     <!-- Aiox -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
@@ -354,7 +357,7 @@
                         //console.log(virusData)
 
                         sickAreaData = virusData.map(x => {
-                            let area = areaData.find(y => y.City == x.縣市 && y.District == x.鄉鎮);
+                            let area = areaData.find(y => y.City == x.縣市.replace('台','臺') && y.District == x.鄉鎮);
                             return {
                                 CountryTown: x.縣市 + x.鄉鎮,
                                 Country: x.縣市,
@@ -412,7 +415,7 @@
                     })
 
                     districtSelect.onchange = function () {
-                        let location = areaData.find(x => x.District == districtSelect.selectedOptions[0].innerText);
+                        let location = areaData.find(x => x.District == districtSelect.selectedOptions[0].innerText &&x.City==countrySelect.selectedOptions[0].innerText);
                         //console.log(location)
                         map.setView([location.Lat, location.Lng], 12)
                     }

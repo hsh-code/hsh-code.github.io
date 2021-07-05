@@ -13,21 +13,19 @@
         <h1 class="text-center">寶可夢圖鑑列表</h1>
     </div>
     <div class="buttonarea text-center">   
-        <button class="btn btn-primary" id="fetchPokemon" onclick="fetchPokemon()">載入寶可夢圖鑑列表-1</button>
-        <button class="btn btn-primary" id="fetchPokemon_appendChild">載入寶可夢圖鑑列表-2</button>
-        <button class="btn btn-primary" id="fetchPockemon_addEvent">載入寶可夢圖鑑列表-3</button>
-        <button class="btn btn-secondary" id="reset">重置</button>
+        <button class="btn btn-primary" onclick="fetchPokemon()">載入寶可夢圖鑑列表(html直接產生)</button>
+        <button class="btn btn-primary" id="fetchPokemon_appendChild">載入寶可夢圖鑑列表(從dom生成img element)</button>
+        <button class="btn btn-primary" id="fetchPockemon_addEvent">載入寶可夢圖鑑列表(使用eventlistener)</button>
     </div>
     <div class="button2area text-center my-3">
         <button class="btn btn-warning" id="AddOne">AddOne</button>
-        <button class="btn btn-warning" id="RemoveOne" onclick="RemoveOne()">RemoveOne</button>
-        <button class="btn btn-success" id="TimeLoad">Timer</button>
-        <button class="btn btn-success" id="TimeStop">Stop Timer</button>
+        <button class="btn btn-warning" onclick="RemoveOne()">RemoveOne</button>
+        <button class="btn btn-secondary" id="reset">重置</button>
     </div>
     <div id="container" class="m-auto"></div>
 
     <script>
-        let container =document.getElementById("container");
+        var container =document.getElementById("container");
         
         //btn1--html直接產生
         function fetchPokemon(){
@@ -41,6 +39,7 @@
             }
             container.innerHTML=pokemons;
         }
+
         //btn2--從dom生成img element
         let btn2=document.getElementById("fetchPokemon_appendChild");
         btn2.onclick=function(){
@@ -54,8 +53,6 @@
                 pokemonImg.setAttribute('src',pathFile);
 
                 container.appendChild(pokemonImg);
-                //新增點擊圖片刪除功能
-                pokemonImg.addEventListener('click',removeImg);
             }
         }
 
@@ -69,10 +66,7 @@
                 let pokemonImg=document.createElement("img");
                 pokemonImg.setAttribute('src',pathFile);
                 container.appendChild(pokemonImg);
-                //新增點擊圖片刪除功能
-                pokemonImg.addEventListener('click',removeImg);
             }
-
         })
 
         //btn4-reset
@@ -87,22 +81,18 @@
             // } 
 
             //reset-3
-            // while(container.childNodes[0]){
-            // container.removeChild(container.childNodes[0]);
-            // }
-            // document.getElementById("TimeLoad").disabled=false;
-            
-            //reset-4
-            window.location.reload();
+            while(container.childNodes[0]){
+            container.removeChild(container.childNodes[0]);
+            }
         }
         
         //加一
         var index=1;
         let add=document.getElementById("AddOne");
         add.addEventListener('click',function(){
+            
             let fileName=index.toString().padStart(3,'0');
             let pathFile=`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName}.png`;
-            
             let pokemonImg=document.createElement("img");
             pokemonImg.setAttribute('src',pathFile);
             container.appendChild(pokemonImg);
@@ -111,58 +101,11 @@
 
         //減一
         function RemoveOne(){
-            
-            // pokemonImg.setAttribute('onclick',pokemonImg);
-            // if(pokemonImg.onclick){
-            //     container.removeChild(container.childNodes[index]);
-            // }
-            // else 
-            
             if(container.childNodes.length>0){
                 container.removeChild(container.lastChild);
                 index>1?index--:index;
             }
         }
-
-        //非同步載入
-        let _timer = document.getElementById("TimeLoad");
-        let intervalId;
-        _timer.addEventListener('click',x=>{
-            index=1;
-            container.innerHTML='';
-            intervalId = setInterval(TimeLoading,800);
-            document.getElementById("fetchPokemon").disabled=true;
-            document.getElementById("fetchPokemon_appendChild").disabled=true;
-            document.getElementById("fetchPockemon_addEvent").disabled=true;
-            document.getElementById("AddOne").disabled=true;
-            document.getElementById("RemoveOne").disabled=true;
-            document.getElementById("TimeLoad").disabled=true;
-        })
-        function TimeLoading(){
-            let fileName=index.toString().padStart(3,'0');
-            let pathFile=`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName}.png`;
-            let pokemonImg2=document.createElement("img");
-            pokemonImg2.setAttribute('src',pathFile);
-            container.appendChild(pokemonImg2);
-            index++;
-        }
-        //TimeStop
-        let _timestop =document.getElementById("TimeStop");
-        _timestop.addEventListener('click',x=>{
-            clearInterval(intervalId);
-            document.getElementById("fetchPokemon").disabled=false;
-            document.getElementById("fetchPokemon_appendChild").disabled=false;
-            document.getElementById("fetchPockemon_addEvent").disabled=false;
-            document.getElementById("AddOne").disabled=false;
-            document.getElementById("RemoveOne").disabled=false;
-            document.getElementById("TimeLoad").disabled=false;
-        })
-        //點擊圖片刪除
-        function removeImg(event) {
-            container.removeChild(event.target);
-        }
-
-
     </script>
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->

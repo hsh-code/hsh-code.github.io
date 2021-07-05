@@ -1,0 +1,470 @@
+@media screen and (min-width:879px){
+    body{
+        // border-right: yellow solid 2px;
+        // border-left: yellow solid 2px;
+        width: 1200px;
+        margin: auto;
+        position: relative;
+    }
+
+    .bgcolor{
+        min-width: 1200px;
+        //不是永遠100%
+    }
+//header
+.headerformb{
+    display: none;
+}
+
+.headerforpc{
+    min-width: 1200px;
+    font-size: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    font-weight: bolder;
+    position: fixed;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 10px;
+    .logo,.language{
+        a{
+            font-weight: bolder;
+            position: relative;
+            top: 20px;
+        }
+    }
+    nav{
+        margin: 0 auto;
+        .outline{
+            display: flex;
+            flex-direction: row;
+            li:first-child{
+                border-bottom: black solid 2px;
+            }
+            a{
+                display: block;
+                // inline沒有高度
+                padding:20px 0;
+                margin: 0 20px;
+                white-space: nowrap;
+            }
+        }
+    }
+}
+
+//banner
+.banner{
+    .banner_info{
+        display: flex;
+        flex-direction: column;
+        // width: 100vw;
+        min-width: 1200px;
+        height: 100vh;
+        justify-content: center;
+        .banner_text{
+            padding: 30px 0;
+            position: absolute;
+            .slogan{
+                margin-left: 170px;
+                font-size: 140px;
+                white-space: nowrap;
+            }
+            .slogan_text{
+                margin-left: 170px;
+                font-size: 40px;
+            }
+            .slogan_text::before{
+                font-size: 20px;
+                font-weight: normal;
+                content: "scroll";
+                position:absolute;
+                bottom: 40%;
+                left: 50%;
+                animation: updown 0.5s linear infinite alternate;
+                @keyframes updown {
+                    from {
+                        transform: translateY(0);
+                    }
+                    to {
+                        transform: translateY(10px);
+                    }
+                }
+            }
+            .slogan_text::after{
+                content:"";
+                position: absolute;
+                height: 100px;
+                border-left: white solid 3px;
+                bottom: 30%;
+                right: 48%;
+                animation: liner 1s linear infinite backwards;
+                @keyframes liner {
+                    0%{transform: translateY(50px);}
+                    100%{transform:translateY(100px);}
+                }
+            }
+
+            .banner_download{
+                margin-top: 70px;
+                margin-left: 170px;
+                .link{
+                    // display: flex;
+                    // flex-direction: column;
+                    .pc li{
+                        display: inline-block;
+                        padding:0 5px;
+                        button{
+                            // display: inline-block;
+                            background-color: transparent;
+                            font-size: 20px;
+                            font-weight: bold;
+                            padding: 15px;
+                            margin: 15px 0;
+                            border: 1px solid #CDCDCD;
+                        }
+                    }
+                    .only-mobile{
+                        button{
+                            border: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+//lifeonline
+    .lifeonline{
+        min-width: 1200px;
+        .product_title{
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            h2{
+                display: inline-block;
+                font-size: 60px;
+                color: #1e1e1e;
+                font-weight: bolder;
+                margin-bottom:12px;
+                margin: 0 0 20px;
+                padding: 0 16px;
+            }
+            p{
+                color: #777;
+                font-weight: bolder;
+                line-height: 1.7;
+                margin-bottom: 60px;
+            }
+        }
+        .pdborder{
+            margin-left:50%;
+
+            .product{
+                margin-left:-100%;
+                .product_pic{
+                    display: flex;
+                    img{
+                    width: 100%;
+                    // border: red dotted 2px;
+                    }
+                }
+                .product_pic_formb{
+                    display: none;
+                }
+                .product_con{
+                    display: flex;
+                    flex-direction: row;
+                    margin: 80px;
+                    .product_txt_con{
+                        display: flex;
+                        flex-direction: column;
+                        .link-icon{
+                            img{
+                                margin:10px 40px;
+                            }
+                        }
+                    }
+                }
+                .product_con.odd{
+                    flex-direction: row-reverse;
+                    .product_pic{
+                        margin-right: 50px;
+                    }
+                }
+                .product_con.odd::before{
+                    content:"";
+                    width: 8px;
+                    height: 8px;
+                    background-color: #fff;
+                    border: gray solid 1px;
+                    border-radius: 50%;
+                    position: absolute;
+                    margin-right: 664px;
+                }
+                .product_con.even{
+                    .product_pic{
+                        margin-left: -150px;
+                    }
+                }
+                .product_con.even::before{
+                    content:"";
+                    width: 8px;
+                    height: 8px;
+                    background-color: #fff;
+                    border: gray solid 1px;
+                    border-radius: 50%;
+                    position: absolute;
+                    margin-left: 503px;
+                }
+                .product_con:nth-child(3){
+                    .product_pic{
+                        margin-left: -20px;
+                    }
+                }
+                .product_con:nth-child(4){
+                    .product_pic{
+                        margin-right: 30px;
+                    }
+                }
+                .product_con:last-child{
+                    .product_pic{
+                        margin-right: 150px;
+                    }
+                }
+                .product_con:last-child::after{
+                    content:"";
+                    width: 8px;
+                    height: 8px;
+                    background-color:#fff;
+                    border: gray solid 1px;
+                    border-radius: 50%;
+                    position: absolute;
+                    margin-right: 664px;
+                    margin-top: 405px;
+                }
+            }
+        }
+
+
+
+    }
+
+//software
+    .software{
+        width: 1200px;
+        margin:60px auto;
+        background-color: #f7f8f9;
+        .software_info{
+            text-align: center;
+            h2{
+                display: inline-block;
+                font-size: 60px;
+                color: #1e1e1e;
+                font-weight: bolder;
+                margin-bottom:12px;
+                margin: 0 0 20px;
+                padding: 0 16px;
+            }
+            p{
+                color: #777;
+                line-height: 1.7;
+                margin-bottom: 60px;
+            }
+        }
+        .software_con{
+            display: flex;
+            justify-content: space-between;
+            .item{
+                margin: auto auto;
+                width: 340px;
+            }
+        }
+    }
+
+//banner2
+    .bannertwo{
+        min-width: 1200px;
+        max-width: 1920px;
+        //在min-width&max-width之間width預設為100%
+        height:320px;
+        margin:160px auto;
+    }
+
+//service
+    .service{
+        width: 1200px;
+        margin:0 auto;
+        .title{
+            h2{
+                font-size: 60px;
+                font-weight: 700;
+                line-height: 1.27;
+            }
+        }
+        .servicelist{
+            display: flex;
+            margin:60px auto; 
+            .sidebar{
+                width: 360px;
+                ul{
+                    padding-left: 40px;
+                    display: flex;
+                    flex-direction: column;
+                    overflow: unset;
+                    li{
+                        margin-bottom: 20px;
+                    }
+                }
+            }
+            .service_cont{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                background-color: white;
+                width: 1060px;
+                .app{
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: wrap;
+                    box-shadow: 5px 5px 15px rgb(179, 179, 179);
+                    width: 270px;
+                    position: relative;
+                    img{
+                        margin-top: 20px;
+                    }
+                    .itemdetail{
+                        margin: 20px 0;
+                        i{
+                            display: block;
+                            margin-top: 80px;
+                            color: #BDBCBD;
+                        }
+                    }
+
+                }
+                .app:hover{
+                    background-color: rgba(0, 0, 0, 0.8);
+                    transition: .5s;                    
+                    img{
+                        // position: absolute;
+                        // z-index: 1;
+                        // display: none;
+                        -webkit-filter: brightness(.3);
+                        transition: .5s;
+                    }
+
+
+                    .itemdetail{
+                        i{
+                            display: none;
+                        }
+                    }
+                    .app_download{
+                        position: absolute;
+                        z-index: 3;
+                        display: flex;
+                        flex-direction: column;
+                        top:40%;
+                        a{
+                            border: 1px solid #CDCDCD;
+                            border-radius: 5px;
+                            font-size: 14px;
+                            width: 150px;
+                            height: 30px;
+                            text-align: center;
+                            color: white;
+                            margin:10px 0;
+                            i{
+                                color:white;
+                                padding: 5px;
+                            }
+                            i:last-child{
+                                display: none;
+                            }
+                        }
+                        a:hover{
+                            background-color: #00c300;
+                            border-color: #00c300;
+                            i:first-child{
+                                display: none;
+                            }
+                            i:last-child{
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    footer{
+        width: 1200px;
+        margin: 0 20px;
+        position: relative;
+        .downloadlist{
+            display: flex;
+            padding: 20px 0;
+            align-items: center;
+            img{
+                width: 25px;
+                height: 25px;
+                border-radius: 8px;
+                display: inline-block;
+            }
+            li{
+                a{
+                    padding: 0 5px;
+                }
+                i{
+                    padding: 0 3px;
+                }
+            }
+            li:not(:last-of-type)::after{
+                content: "";
+                border-left: grey solid 1px;
+            }
+        }
+        .footer_con{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            //若字體不同上緣切齊還是會看起來不整齊
+            
+            .footerlist{ 
+                margin-left: 20px;
+            }
+            >a:last-of-type{
+                right: 200px;
+            }
+            .linkout{
+                margin:0 20px 0 auto;
+                img{
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+        .lineAcount{
+            display: none;
+        }
+        .lineAcountforpc{
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            right:30px;
+            top: -70px;
+            img{
+                width: 90px;
+                height: 90px;
+                margin: auto;
+                //置中
+            }
+        }
+    }
+}

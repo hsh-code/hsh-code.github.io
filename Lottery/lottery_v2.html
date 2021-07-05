@@ -20,11 +20,11 @@
             text-align: center;
             /* width: 1200px; */
             margin: auto;
+            background-color: #CFDD8E;
         }
 
         #L {
             background: #77BA99;
-            /* background:pink url("https://i.pinimg.com/originals/7d/dc/71/7ddc718b0ccd74084b5f2545e21e28cf.jpg") top fixed no-repeat; */
             background-size: center;
             width: 600px;
         }
@@ -62,6 +62,7 @@
 
         #food .L1 {
             /* background-color: #C13820; */
+            /* background: #E1F1E7; */
             transform: skew(54deg);
         }
 
@@ -128,7 +129,7 @@
         }
 
         /* 指針*/
-        .hand::after {
+        .sechand{
             content: "";
             display: block;
             width: .4rem;
@@ -169,7 +170,9 @@
                     <h1 class="text-center my-2 justify-content-center"> <i class="fas fa-utensils"></i> 到底要吃什麼R</h1>
                     <div class="clock">
                         <div id="food">
-                            <div class="hand" id="hand"></div>
+                            <div class="hand" id="hand">
+                                <div class="sechand"></div>
+                            </div>
                             <div class="box">
                                 <p box-id="1" class="L1"><span></span></p>
                                 <p box-id="2" class="L2"><span></span></p>

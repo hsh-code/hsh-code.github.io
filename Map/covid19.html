@@ -348,6 +348,7 @@
             }
 
             window.onload = function () {
+                alert('請允許定位您目前的位置方可使用，若下拉選單仍無法使用，請重新整理頁面一次，謝謝')
                 Promise.all([areaDataRequest, virusDataRequest])
                     .then(res => {
                         let [areaRes, virusRes] = res;

@@ -120,9 +120,15 @@ function showCalenderInfo(year, month) {
 					todoList.sort((a, b) => {
 						let firstTime = Number((a.time).split(':').join(''));
 						let secondTime = Number((b.time).split(':').join(''));
-						return firstTime - secondTime;
+						//console.log(Number(a.time))
+						if(firstTime==0){
+							return firstTime=-2
+						}
+						else{
+							return firstTime>secondTime?1:-1
+						}
 					})
-					//console.log(todoList)
+					console.log(todoList)
 					todoList.forEach(item => {
 						let li = document.createElement('li');
 						li.innerHTML = item.time + ' ' + item.title;
@@ -178,7 +184,7 @@ function SaveTodoItem() {
 	};
 
 	let todoList = [];
-	console.log(todoObj)
+	//console.log(todoObj)
 	//LocalStorage只能用key來找
 	if (localStorage.getItem(todoObj.date) == null) {
 		todoList.push(todoObj);
@@ -202,7 +208,7 @@ function EditTodoItem() {
 	let show_todo_time = document.getElementById('info-todo-time').value;
 	let show_todo_item = document.getElementById('info-todo-item').value;
 
-	let todoList = [];
+	//let todoList = [];
 	todoList = JSON.parse(localStorage.getItem(show_event_date));
 	console.log(todoList)
 	let edit_todoitem = todoList.find(x => x.date && x.time &&x.title);

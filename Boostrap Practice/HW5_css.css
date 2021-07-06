@@ -1,0 +1,25 @@
+body {
+  position: relative;
+  width: 1200px;
+}
+
+.navbar {
+  z-index: 999;
+}
+
+.logo img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.logo a {
+  display: block;
+}
+
+/***************navBar*********/
+.nav-link {
+  -webkit-transition: 1s ease;
+  transition: 1s ease;
+}
+/*# sourceMappingURL=HW5_css.css.map */

@@ -64,7 +64,6 @@
             width: 100%;
             height: 100%;
         }
-
         .add_canvas_style {
             width: 100%;
             height: 100%;
@@ -181,6 +180,21 @@
             var osm = new L.TileLayer(osmUrl, { minZoom: 8, maxZoom: 19 });
             map.addLayer(osm);
 
+            //2.2 加 icon
+            var myIcon = L.Icon.extend({
+                options: {
+                    shadowUrl: './stretching-exercises.png',
+                    iconSize: [30, 30],
+                    shadowSize:   [30, 30],
+                    iconAnchor: [22, 94],
+                    // shadowAnchor: [4, 62],
+                    popupAnchor: [-3, -76]
+                }
+            });
+            var locationIcon = new myIcon({iconUrl:'./stretching-exercises.png'})
+            L.icon=function(options){return new L.Icon(options)}
+            L.marker([x, y], {icon: locationIcon}).addTo(map).bindPopup("媽我在這!");
+
             //3.抓資料來源(Axios)
             //台灣行政區域資料
             let areaDataRequest = axios.get('https://raw.githubusercontent.com/hsh-code/FileStorage/main/%E5%8F%B0%E7%81%A3%E8%A1%8C%E6%94%BF%E5%9C%B0%E5%8D%80.json');
@@ -196,6 +210,7 @@
 
             let countrySelect = document.querySelector('#country');
             let districtSelect = document.querySelector('#district');
+
             function setMarker() {
                 if (markers) markers.clearLayers(); //清空markers
                 Object.keys(sickAreaData).forEach(x => {
@@ -358,7 +373,7 @@
                         //console.log(virusData)
 
                         sickAreaData = virusData.map(x => {
-                            let area = areaData.find(y => y.City == x.縣市.replace('台','臺') && y.District == x.鄉鎮);
+                            let area = areaData.find(y => y.City == x.縣市.replace('台', '臺') && y.District == x.鄉鎮);
                             return {
                                 CountryTown: x.縣市 + x.鄉鎮,
                                 Country: x.縣市,
@@ -416,7 +431,7 @@
                     })
 
                     districtSelect.onchange = function () {
-                        let location = areaData.find(x => x.District == districtSelect.selectedOptions[0].innerText &&x.City==countrySelect.selectedOptions[0].innerText);
+                        let location = areaData.find(x => x.District == districtSelect.selectedOptions[0].innerText && x.City == countrySelect.selectedOptions[0].innerText);
                         //console.log(location)
                         map.setView([location.Lat, location.Lng], 12)
                     }

@@ -32,8 +32,12 @@
             background: linear-gradient(135deg, #ff9068 0%, #ffce63 48%, #fd746c 100%);
         }
 
+        .h4, .h5, .h6, h4, h5, h6 {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
         .gameborder {
-            padding: 20px;
             max-width: 800px;
             min-height: 350px;
             border: rgba(255, 255, 255, 0.918) solid 2px;
@@ -46,10 +50,9 @@
 
         .output {
             display: flex;
-            justify-content: space-around;
+            /* justify-content: space-around; */
+            justify-content: center;
         }
-
-        .output p {}
 
         .output_result {
             display: flex;
@@ -59,10 +62,6 @@
         .output_result span {
             background-color: red;
             margin: 10px;
-        }
-
-        .userGuess:hover {
-            content: '請先按下開始';
         }
     </style>
 </head>
@@ -74,17 +73,16 @@
                 <div class="container-fluid">
                     <div class="row output">
                         <div class="col-8 col-sm-10 col-md-12 col-lg-12">
-                            <div class="btn-group btn-group-justified">
+                            <div class="btn-group d-flex justify-content-center">
                                 <a id="start" type="button" class="btn btn-danger RandomNum">開始遊戲</a>
                                 <a id="restart" type="button" class="btn btn-warning" onclick="Reset()
     ">放棄重來</a>
                                 <a id="cheat" type="button" class="btn btn-primary">看答案</a>
                             </div>
-                            <h2>GUESS THE NUMBER!</h2>
+                            <h2 style="font-size: 25px;">GUESS THE NUMBER!</h2>
                             <div class="input-group ">
                                 <span class="input-group-addon" id="sizing-addon1">猜答案</span>
-                                <input id="userGuess" type="text" name="" class="form-control" value="
-    請先按下開始" required="required" maxlength="4">
+                                <input id="userGuess" type="text" name="" class="form-control" placeholder="請輸入4個「不同」數字" value="請先按下開始" required="required" maxlength="4">
                                 <span class="input-group-btn">
                                     <a id="guess" type="button" class="btn btn-default CheckAnswer"
                                         data-toggle="tooltip" title="請先按下開始">猜!</a>
@@ -106,7 +104,7 @@
                 <div class="container-fluid">
                     <div class="row output">
                         <div class="col-12 col-sm-12 col-md-12 output_result">
-                            <h4 id="game_result" class="msg" style="font-weight: bolder;">您的輸入結果：</h4>
+                            <h4 id="game_result" class="msg" style="font-weight: bolder;margin-top:15px">您的輸入結果：</h4>
                         </div>
                         <div class="col-3 col-sm-3 col-md-3 col-lg-4 d-flex">
                             <p class='guesstime' style="background-color: whitesmoke;"></p>

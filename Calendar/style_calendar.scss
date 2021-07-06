@@ -1,7 +1,6 @@
 body {
 	font-family: "Ubuntu", sans-serif;
 	margin: auto;
-	// background-color: #77ba99;
 	background-color: #B1D3C5;
 }
 
@@ -12,7 +11,10 @@ body {
 }
 
 #calendar {
-	width: 1200px;
+	// width: 1200px;
+	width: 100vw;
+	height: 100vh;
+	margin: auto;
 }
 
 #calendar > div:first-child {
@@ -32,10 +34,12 @@ body {
 		font-size: 2rem;
 	}
 	table {
+		width: 100vw;
+		height: 100vh;
 		thead tr th {
 			div {
-				width: 80px;
-				height: 40px;
+				width: 6.666666vw;
+				height: 6.666666vh;
 				padding: 0.6vh 0.6vh;
 				margin: auto;
 				text-align: center;
@@ -44,17 +48,20 @@ body {
 		tbody td {
 			width: 80px;
 			height: 80px;
-			max-height: 80px;
+			// max-height: 80px;
+			// max-height: 6.666666vh;
 			border: 1px solid #23232324;
 			span {
 				padding: 0.6vh;
 			}
 			ul {
+				padding-top: 15px;
 				font-size: 12px;
-				// height: 100%;
-				// width: 100%;
-				max-width: 80px;
-				max-height: 50px;
+				height: 100%;
+				width: 100%;
+				// max-width: 80px;
+				max-width: 8vw;
+				max-height: 15vh;
 				// max-height: calc(100% - 40px);
 				overflow: auto;
 			}

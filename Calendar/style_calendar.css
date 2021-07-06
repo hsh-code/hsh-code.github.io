@@ -87,6 +87,11 @@ body {
   line-height: 2;
 }
 
+.modal-backdrop {
+  filter: alpha(opacity=0) !important;
+  opacity: 0 !important;
+}
+
 .today_tag {
   background-color: #FEF5D4;
   cursor: pointer;

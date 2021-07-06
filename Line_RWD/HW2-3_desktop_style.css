@@ -115,15 +115,15 @@
     position: absolute;
     height: 100px;
     border-left: white solid 3px;
-    bottom: 20%;
+    bottom: 30%;
     right: 48%;
     -webkit-animation: liner 1s linear infinite backwards;
             animation: liner 1s linear infinite backwards;
   }
   @-webkit-keyframes liner {
     0% {
-      -webkit-transform: translateY(0);
-              transform: translateY(0);
+      -webkit-transform: translateY(50px);
+              transform: translateY(50px);
     }
     100% {
       -webkit-transform: translateY(100px);
@@ -132,8 +132,8 @@
   }
   @keyframes liner {
     0% {
-      -webkit-transform: translateY(0);
-              transform: translateY(0);
+      -webkit-transform: translateY(50px);
+              transform: translateY(50px);
     }
     100% {
       -webkit-transform: translateY(100px);

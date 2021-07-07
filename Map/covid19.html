@@ -192,14 +192,14 @@
                     popupAnchor: [0, -15]
                 }
             });
-            var locationIcon = new myIcon({ iconUrl: './placeholder.png' })
+            var locationIcon = new myIcon({ iconUrl: './jumping-dancer.png' })
             L.icon = function (options) { return new L.Icon(options) }
 
             L.marker([x, y], {
                 draggable: true,
                 icon: locationIcon
             }).addTo(map).bindPopup("媽我在這!");
-            
+
         //3.抓資料來源(Axios)
         //台灣行政區域資料
         let areaDataRequest = axios.get('https://raw.githubusercontent.com/hsh-code/FileStorage/main/%E5%8F%B0%E7%81%A3%E8%A1%8C%E6%94%BF%E5%9C%B0%E5%8D%80.json');

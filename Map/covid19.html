@@ -64,6 +64,7 @@
             width: 100%;
             height: 100%;
         }
+
         .add_canvas_style {
             width: 100%;
             height: 100%;
@@ -171,10 +172,12 @@
             y = result.coords.longitude;
             console.log(x, y)
             //1.初始化地圖
-            var map = L.map('map', {
-                center: [x, y],
-                zoom: 10
-            });
+            var map = L.map('map').setView([x, y], 10);
+            // var map = L.map('map', {
+            //     center: [x, y],
+            //     zoom: 10
+            // });
+
             // 2.設定圖資來源
             var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
             var osm = new L.TileLayer(osmUrl, { minZoom: 8, maxZoom: 19 });
@@ -183,260 +186,262 @@
             //2.2 加 icon
             var myIcon = L.Icon.extend({
                 options: {
-                    shadowUrl: './stretching-exercises.png',
+                    iconUrl: './stretching-exercises.png',
                     iconSize: [30, 30],
-                    shadowSize:   [30, 30],
-                    iconAnchor: [22, 94],
-                    // shadowAnchor: [4, 62],
-                    popupAnchor: [-3, -76]
+                    iconAnchor: [15, 15],
+                    popupAnchor: [0, -15]
                 }
             });
-            var locationIcon = new myIcon({iconUrl:'./stretching-exercises.png'})
-            L.icon=function(options){return new L.Icon(options)}
-            L.marker([x, y], {icon: locationIcon}).addTo(map).bindPopup("媽我在這!");
+            var locationIcon = new myIcon({ iconUrl: './placeholder.png' })
+            L.icon = function (options) { return new L.Icon(options) }
 
-            //3.抓資料來源(Axios)
-            //台灣行政區域資料
-            let areaDataRequest = axios.get('https://raw.githubusercontent.com/hsh-code/FileStorage/main/%E5%8F%B0%E7%81%A3%E8%A1%8C%E6%94%BF%E5%9C%B0%E5%8D%80.json');
-            //各行政區域病例資料
-            let virusDataRequest = axios.get('https://raw.githubusercontent.com/hsh-code/FileStorage/main/%E5%9C%B0%E5%8D%80%E5%B9%B4%E9%BD%A1%E6%80%A7%E5%88%A5%E7%B5%B1%E8%A8%88%E8%A1%A8-%E5%9A%B4%E9%87%8D%E7%89%B9%E6%AE%8A%E5%82%B3%E6%9F%93%E6%80%A7%E8%82%BA%E7%82%8E-%E4%BE%9D%E5%80%8B%E6%A1%88%E7%A0%94%E5%88%A4%E6%97%A5%E7%B5%B1%E8%A8%88.json');
+            L.marker([x, y], {
+                draggable: true,
+                icon: locationIcon
+            }).addTo(map).bindPopup("媽我在這!");
+            
+        //3.抓資料來源(Axios)
+        //台灣行政區域資料
+        let areaDataRequest = axios.get('https://raw.githubusercontent.com/hsh-code/FileStorage/main/%E5%8F%B0%E7%81%A3%E8%A1%8C%E6%94%BF%E5%9C%B0%E5%8D%80.json');
+        //各行政區域病例資料
+        let virusDataRequest = axios.get('https://raw.githubusercontent.com/hsh-code/FileStorage/main/%E5%9C%B0%E5%8D%80%E5%B9%B4%E9%BD%A1%E6%80%A7%E5%88%A5%E7%B5%B1%E8%A8%88%E8%A1%A8-%E5%9A%B4%E9%87%8D%E7%89%B9%E6%AE%8A%E5%82%B3%E6%9F%93%E6%80%A7%E8%82%BA%E7%82%8E-%E4%BE%9D%E5%80%8B%E6%A1%88%E7%A0%94%E5%88%A4%E6%97%A5%E7%B5%B1%E8%A8%88.json');
 
-            //4.全域變數宣告
-            let areaData; //行政區
-            let virusData; //病例
-            let sickAreaData; //行政區+病例
+        //4.全域變數宣告
+        let areaData; //行政區
+        let virusData; //病例
+        let sickAreaData; //行政區+病例
 
-            let markers = L.markerClusterGroup(); //marker聚集物件
+        let markers = L.markerClusterGroup(); //marker聚集物件
 
-            let countrySelect = document.querySelector('#country');
-            let districtSelect = document.querySelector('#district');
+        let countrySelect = document.querySelector('#country');
+        let districtSelect = document.querySelector('#district');
 
-            function setMarker() {
-                if (markers) markers.clearLayers(); //清空markers
-                Object.keys(sickAreaData).forEach(x => {
-                    let data = sickAreaData[x];
-                    //console.log(data)
-                    let marker = L.marker([data[0].Lat, data[0].Lng]);
-                    let sick_total = data.map(x => Number(x.CaseNum)).reduce((a, b) => a + b);
-                    //console.log('sicktotal='+`${sick_total}`)
-                    marker.bindPopup(`
+        function setMarker() {
+            if (markers) markers.clearLayers(); //清空markers
+            Object.keys(sickAreaData).forEach(x => {
+                let data = sickAreaData[x];
+                //console.log(data)
+                let marker = L.marker([data[0].Lat, data[0].Lng]);
+                let sick_total = data.map(x => Number(x.CaseNum)).reduce((a, b) => a + b);
+                //console.log('sicktotal='+`${sick_total}`)
+                marker.bindPopup(`
                     <h4>${data[0].Country} ${data[0].Town}</h4>
                     <p>確診案例累計人數：${sick_total}人</p>
                     `)
 
-                    let months_data = data.groupBy('Month');
-                    //console.log(months_data)
-                    let Area_monsAry = Object.keys(months_data);
-                    //console.log(perMonAry)
-                    Object.values(months_data).forEach((month, index) => {
-                        Area_monsAry[index] += "," + month.map(x => Number(x.CaseNum)).reduce((a, b) => a + b);
+                let months_data = data.groupBy('Month');
+                //console.log(months_data)
+                let Area_monsAry = Object.keys(months_data);
+                //console.log(perMonAry)
+                Object.values(months_data).forEach((month, index) => {
+                    Area_monsAry[index] += "," + month.map(x => Number(x.CaseNum)).reduce((a, b) => a + b);
+                })
+                //console.log(Area_monsAry)
+
+                //自訂當按下marker時
+                marker.addEventListener('click', function () {
+                    //副標題
+                    let secondtitle = document.querySelector('#sick_district strong:first-child');
+                    secondtitle.innerText = `${data[0].CountryTown}`;
+                    //表格-詳細資料
+                    const Month = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+                    let thead = document.querySelector('.sickDetail thead');
+                    let tbody = document.querySelector('.sickDetail tbody');
+
+                    thead.innerHTML = '';
+                    tbody.innerHTML = '';
+
+                    let MonthTr = document.createElement('tr');
+                    Month.forEach(_mon => {
+                        let Monthtd = document.createElement('td');
+                        Monthtd.innerText = _mon;
+                        MonthTr.appendChild(Monthtd);
                     })
-                    //console.log(Area_monsAry)
+                    thead.appendChild(MonthTr);
 
-                    //自訂當按下marker時
-                    marker.addEventListener('click', function () {
-                        //副標題
-                        let secondtitle = document.querySelector('#sick_district strong:first-child');
-                        secondtitle.innerText = `${data[0].CountryTown}`;
-                        //表格-詳細資料
-                        const Month = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
-                        let thead = document.querySelector('.sickDetail thead');
-                        let tbody = document.querySelector('.sickDetail tbody');
-
-                        thead.innerHTML = '';
-                        tbody.innerHTML = '';
-
-                        let MonthTr = document.createElement('tr');
-                        Month.forEach(_mon => {
-                            let Monthtd = document.createElement('td');
-                            Monthtd.innerText = _mon;
-                            MonthTr.appendChild(Monthtd);
-                        })
-                        thead.appendChild(MonthTr);
-
-                        let SickTr = document.createElement('tr');
-                        let mon = [];
-                        let sickperson = [];
-                        data.forEach((x, index) => {
-                            if (Area_monsAry[index] != null) {
-                                mon[index] = Number(Area_monsAry[index].split(',')[0]);
-                                sickperson[index] = Number(Area_monsAry[index].split(',')[1]);
-                                //console.log(mon)
-                                //console.log(sickperson)
-                            }
-                        });
-                        let index = 0;
-                        let chartDataAry = [];
-                        for (let i = 1; i < 13; i++) {
-                            if (mon[index] == i) {
-                                let td = document.createElement('td');
-                                td.innerText = sickperson[index];
-                                SickTr.appendChild(td);
-                                chartDataAry[i - 1] = sickperson[index];
-                                index++;
-                            }
-                            else {
-                                let td = document.createElement('td');
-                                td.innerText = '0';
-                                SickTr.appendChild(td);
-                                chartDataAry[i - 1] = 0;
-                            }
+                    let SickTr = document.createElement('tr');
+                    let mon = [];
+                    let sickperson = [];
+                    data.forEach((x, index) => {
+                        if (Area_monsAry[index] != null) {
+                            mon[index] = Number(Area_monsAry[index].split(',')[0]);
+                            sickperson[index] = Number(Area_monsAry[index].split(',')[1]);
+                            //console.log(mon)
+                            //console.log(sickperson)
                         }
+                    });
+                    let index = 0;
+                    let chartDataAry = [];
+                    for (let i = 1; i < 13; i++) {
+                        if (mon[index] == i) {
+                            let td = document.createElement('td');
+                            td.innerText = sickperson[index];
+                            SickTr.appendChild(td);
+                            chartDataAry[i - 1] = sickperson[index];
+                            index++;
+                        }
+                        else {
+                            let td = document.createElement('td');
+                            td.innerText = '0';
+                            SickTr.appendChild(td);
+                            chartDataAry[i - 1] = 0;
+                        }
+                    }
 
-                        tbody.appendChild(SickTr);
-                        //console.log(chartDataAry);
+                    tbody.appendChild(SickTr);
+                    //console.log(chartDataAry);
 
-                        //案例資料
-                        const DetailTitle = ['確診日期', '性別', '年齡', '確診數'];
-                        let thead2 = document.querySelector('.sickPerson thead');
-                        let tbody2 = document.querySelector('.sickPerson tbody');
-                        let PersonTitleTr = document.createElement('tr');
-                        thead2.innerHTML = '';
-                        tbody2.innerHTML = '';
-                        DetailTitle.forEach(x => {
-                            let PersonTitletd = document.createElement('td');
-                            PersonTitletd.innerText = x;
-                            PersonTitleTr.appendChild(PersonTitletd);
+                    //案例資料
+                    const DetailTitle = ['確診日期', '性別', '年齡', '確診數'];
+                    let thead2 = document.querySelector('.sickPerson thead');
+                    let tbody2 = document.querySelector('.sickPerson tbody');
+                    let PersonTitleTr = document.createElement('tr');
+                    thead2.innerHTML = '';
+                    tbody2.innerHTML = '';
+                    DetailTitle.forEach(x => {
+                        let PersonTitletd = document.createElement('td');
+                        PersonTitletd.innerText = x;
+                        PersonTitleTr.appendChild(PersonTitletd);
+                    })
+                    thead2.appendChild(PersonTitleTr);
+
+                    //console.log(data)
+                    Object.values(data).forEach(x => {
+                        //console.log(x)
+                        let person_Data = [`${x.Month + '/' + x.Date}`, `${x.Sex}`, `${x.AgeRange}`, `${x.CaseNum}`];
+                        let PersonDetailTr = document.createElement('tr');
+                        //console.log(person_Data)
+                        person_Data.forEach(x => {
+                            let Persontd = document.createElement('td');
+                            Persontd.innerText = x;
+                            PersonDetailTr.appendChild(Persontd);
+                            tbody2.appendChild(PersonDetailTr);
                         })
-                        thead2.appendChild(PersonTitleTr);
+                    })
 
-                        //console.log(data)
-                        Object.values(data).forEach(x => {
-                            //console.log(x)
-                            let person_Data = [`${x.Month + '/' + x.Date}`, `${x.Sex}`, `${x.AgeRange}`, `${x.CaseNum}`];
-                            let PersonDetailTr = document.createElement('tr');
-                            //console.log(person_Data)
-                            person_Data.forEach(x => {
-                                let Persontd = document.createElement('td');
-                                Persontd.innerText = x;
-                                PersonDetailTr.appendChild(Persontd);
-                                tbody2.appendChild(PersonDetailTr);
-                            })
-                        })
+                    //長條圖
+                    let sick_district = document.getElementById('sick_district');
+                    let ctx = document.createElement('canvas');
 
-                        //長條圖
-                        let sick_district = document.getElementById('sick_district');
-                        let ctx = document.createElement('canvas');
+                    if (sick_district.querySelector('canvas') != null) { sick_district.removeChild(sick_district.querySelector('canvas')) }
+                    sick_district.appendChild(ctx);
 
-                        if (sick_district.querySelector('canvas') != null) { sick_district.removeChild(sick_district.querySelector('canvas')) }
-                        sick_district.appendChild(ctx);
-
-                        let dataBar = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-                                datasets: [{
-                                    label: '當月確診總人數',
-                                    data: [chartDataAry[0],
-                                    chartDataAry[1],
-                                    chartDataAry[2],
-                                    chartDataAry[3],
-                                    chartDataAry[4],
-                                    chartDataAry[5],
-                                    chartDataAry[6],
-                                    chartDataAry[7],
-                                    chartDataAry[8],
-                                    chartDataAry[9],
-                                    chartDataAry[10],
-                                    chartDataAry[11]],
-                                    // backgroundColor: [
-                                    //     "#FF0000",
-                                    //     "#00FF00",
-                                    //     "#0000FF",
-                                    // ],
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
+                    let dataBar = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                            datasets: [{
+                                label: '當月確診總人數',
+                                data: [chartDataAry[0],
+                                chartDataAry[1],
+                                chartDataAry[2],
+                                chartDataAry[3],
+                                chartDataAry[4],
+                                chartDataAry[5],
+                                chartDataAry[6],
+                                chartDataAry[7],
+                                chartDataAry[8],
+                                chartDataAry[9],
+                                chartDataAry[10],
+                                chartDataAry[11]],
+                                // backgroundColor: [
+                                //     "#FF0000",
+                                //     "#00FF00",
+                                //     "#0000FF",
+                                // ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
                                 }
                             }
-                        })
-
+                        }
                     })
-                    markers.addLayer(marker);
+
                 })
-                map.addLayer(markers);
-            }
+                markers.addLayer(marker);
+            })
+            map.addLayer(markers);
+        }
 
-            window.onload = function () {
-                alert('請允許定位您目前的位置方可使用，若下拉選單仍無法使用，請重新整理頁面一次，謝謝')
-                Promise.all([areaDataRequest, virusDataRequest])
-                    .then(res => {
-                        let [areaRes, virusRes] = res;
-                        areaData = areaRes.data;
-                        virusData = virusRes.data.filter(x => x.個案研判日.includes('2021'));
-                        //console.log(areaData)
-                        //console.log(virusData)
+        window.onload = function () {
+            alert('請允許定位您目前的位置方可使用，若下拉選單仍無法使用，請重新整理頁面一次，謝謝')
+            Promise.all([areaDataRequest, virusDataRequest])
+                .then(res => {
+                    let [areaRes, virusRes] = res;
+                    areaData = areaRes.data;
+                    virusData = virusRes.data.filter(x => x.個案研判日.includes('2021'));
+                    //console.log(areaData)
+                    //console.log(virusData)
 
-                        sickAreaData = virusData.map(x => {
-                            let area = areaData.find(y => y.City == x.縣市.replace('台', '臺') && y.District == x.鄉鎮);
-                            return {
-                                CountryTown: x.縣市 + x.鄉鎮,
-                                Country: x.縣市,
-                                Town: x.鄉鎮,
-                                Month: x.個案研判日.split('/')[1],
-                                Date: x.個案研判日.split('/')[2],
-                                Sex: x.性別,
-                                AgeRange: x.年齡層,
-                                CaseNum: x.確定病例數,
-                                abroad: x.是否為境外移入,
-                                //小防呆
-                                Lat: area != undefined ? area.Lat : undefined,
-                                Lng: area != undefined ? area.Lng : undefined
-                            }
-                        }).filter(x => x.Lat != undefined).groupBy('CountryTown');
-                        //console.log(sickAreaData)
-                        setMarker();
+                    sickAreaData = virusData.map(x => {
+                        let area = areaData.find(y => y.City == x.縣市.replace('台', '臺') && y.District == x.鄉鎮);
+                        return {
+                            CountryTown: x.縣市 + x.鄉鎮,
+                            Country: x.縣市,
+                            Town: x.鄉鎮,
+                            Month: x.個案研判日.split('/')[1],
+                            Date: x.個案研判日.split('/')[2],
+                            Sex: x.性別,
+                            AgeRange: x.年齡層,
+                            CaseNum: x.確定病例數,
+                            abroad: x.是否為境外移入,
+                            //小防呆
+                            Lat: area != undefined ? area.Lat : undefined,
+                            Lng: area != undefined ? area.Lng : undefined
+                        }
+                    }).filter(x => x.Lat != undefined).groupBy('CountryTown');
+                    //console.log(sickAreaData)
+                    setMarker();
 
-                        //下拉選單
-                        ['---請選擇縣市---'].concat([...new Set(areaData.map(x => x.City))]).forEach(city => {
-                            let option1 = document.createElement('option');
-                            option1.innerText = city;
-                            option1.value = city;
-                            countrySelect.appendChild(option1);
-                        })
-                        let option2 = document.createElement('option');
-                        option2.value = '';
-                        option2.innerText = '---請選擇行政區---';
-                        districtSelect.appendChild(option2);
+                    //下拉選單
+                    ['---請選擇縣市---'].concat([...new Set(areaData.map(x => x.City))]).forEach(city => {
+                        let option1 = document.createElement('option');
+                        option1.innerText = city;
+                        option1.value = city;
+                        countrySelect.appendChild(option1);
                     })
-            }
-            countrySelect.onchange = function () {
-                //console.log(countrySelect.selectedOptions[0]);
+                    let option2 = document.createElement('option');
+                    option2.value = '';
+                    option2.innerText = '---請選擇行政區---';
+                    districtSelect.appendChild(option2);
+                })
+        }
+        countrySelect.onchange = function () {
+            //console.log(countrySelect.selectedOptions[0]);
 
-                if (countrySelect.value == '') { return }
-                else {
-                    //改變地圖焦點
-                    let country = areaData.find(x => x.City == this.value);
-                    //console.log(this.value)
-                    map.setView([country.Lat, country.Lng]);
+            if (countrySelect.value == '') { return }
+            else {
+                //改變地圖焦點
+                let country = areaData.find(x => x.City == this.value);
+                //console.log(this.value)
+                map.setView([country.Lat, country.Lng]);
 
-                    districtSelect.innerHTML = '';
-                    let label = document.createElement('option');
-                    label.value = '';
-                    label.innerText = '---請選擇行政區---';
-                    districtSelect.appendChild(label);
+                districtSelect.innerHTML = '';
+                let label = document.createElement('option');
+                label.value = '';
+                label.innerText = '---請選擇行政區---';
+                districtSelect.appendChild(label);
 
-                    let districts = areaData.filter(x => x.City == countrySelect.selectedOptions[0].innerText);
-                    districts.forEach(_distr => {
-                        // console.log(district.District)
-                        let option2 = document.createElement('option');
-                        option2.value = '';
-                        option2.innerText = _distr.District;
-                        districtSelect.appendChild(option2);
-                    })
+                let districts = areaData.filter(x => x.City == countrySelect.selectedOptions[0].innerText);
+                districts.forEach(_distr => {
+                    // console.log(district.District)
+                    let option2 = document.createElement('option');
+                    option2.value = '';
+                    option2.innerText = _distr.District;
+                    districtSelect.appendChild(option2);
+                })
 
-                    districtSelect.onchange = function () {
-                        let location = areaData.find(x => x.District == districtSelect.selectedOptions[0].innerText && x.City == countrySelect.selectedOptions[0].innerText);
-                        //console.log(location)
-                        map.setView([location.Lat, location.Lng], 12)
-                    }
+                districtSelect.onchange = function () {
+                    let location = areaData.find(x => x.District == districtSelect.selectedOptions[0].innerText && x.City == countrySelect.selectedOptions[0].innerText);
+                    //console.log(location)
+                    map.setView([location.Lat, location.Lng], 12)
                 }
-            };
+            }
+        };
         })
         //array groupby方法註冊
         Array.prototype.groupBy = function (prop) {

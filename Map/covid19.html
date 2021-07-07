@@ -76,7 +76,6 @@
             width: 100%;
             height: 100%;
             overflow-y: auto;
-            /* min-width: 680px; */
         }
     </style>
 </head>
@@ -98,13 +97,13 @@
                 </select>
             </div>
         </div>
-        <div class="row mx-auto my-3">
-            <div class="col-6 p-3">
+        <div class="row mx-auto my-3 main">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 p-3 ">
                 <div id="map" class="map_border">
                     <!-- 地圖 -->
                 </div>
             </div>
-            <div class="col-6 p-3">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12 p-3">
                 <div class="row data_border">
                     <h3 class="text-center mt-3 mx-auto">
                         <strong>110年台灣地區個案確診統計</strong>
@@ -158,6 +157,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"
         integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- forcellphone -->
+    <!-- <script type="text/javascript" src="./mapforphone.js"></script> -->
 
     <script>
         let x = 0;
@@ -368,7 +369,7 @@
         }
 
         window.onload = function () {
-            alert('請允許定位您目前的位置方可使用，若下拉選單仍無法使用，請重新整理頁面一次，謝謝')
+            //alert('請允許定位您目前的位置方可使用，若下拉選單仍無法使用，請重新整理頁面一次，謝謝')
             Promise.all([areaDataRequest, virusDataRequest])
                 .then(res => {
                     let [areaRes, virusRes] = res;

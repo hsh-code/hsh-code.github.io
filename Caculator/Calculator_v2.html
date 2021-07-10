@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="../normalize.css">
+    <title>Caculator</title>
+    <style>
+        .container {
+            width: 500px;
+            height: 800px;
+        }
+
+        .screen {
+            height: 109px;
+            background: #84C0E9;
+            border-top-right-radius: 20px;
+            border-top-left-radius: 20px;
+        }
+
+        .input_detail {
+            font-size: 16px;
+            width: 300px;
+            height: 23px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .input_result {
+            width: 310px;
+            font-size: 56px;
+            height: 70px;
+            overflow: hidden;
+            white-space: nowrap;
+            color: #fff;
+        }
+
+        .inputButton {
+            background: #85B8CB;
+            height: 416px;
+            border-bottom-right-radius: 20px;
+            border-bottom-left-radius: 20px;
+        }
+
+        .button,
+        .button_light,
+        .button_light_txt {
+            margin: 6px 2px;
+            width: 72px;
+            height: 64px;
+            font-size: 28px;
+            border: 0;
+            border-radius: 50%;
+            background: #54768F;
+            color: #fff;
+        }
+
+        .button_light_txt {
+            color: #FFB471;
+        }
+
+        .button_equal {
+            margin: 6px 2px;
+            width: 150px;
+            height: 64px;
+            font-size: 28px;
+            border-radius: 16px;
+            border: 0;
+            color: #041936;
+            background: linear-gradient(to right, #A9DFED, #EBD6E8);
+        }
+
+        .button_light:hover {
+            transition: .5s;
+            background: #DBDBE5;
+            color: #041936;
+        }
+
+        .button_equal:hover {
+            transition: .5s;
+            background: #37419A;
+            opacity: 0.5;
+            color: #fff;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="row math d-flex flex-column">
+            <div class="col-12 screen d-flex flex-column justify-content-end align-items-center">
+                <div class="input_detail disPlayDetail mx-1 text-right text-success my-2 p-1">0</div>
+                <div class="input_result disPlayresult text-right text-secondary my-1">0</div>
+            </div>
+            <div class="inputButton w-100 d-flex flex-column justify-content-around">
+                <div class="col-12 d-flex flex-row">
+                    <button type="button" class="button_light_txt ac">AC</button>
+                    <button type="button" class="button_light_txt backspace">←</button>
+                    <button type="button" class="button percent">%</button>
+                    <button type="button" class="button_light operatorBtn" data-math="/">÷</button>
+                </div>
+                <div class="col-12 d-flex flex-row">
+                    <button type="button" class="button num_button" data-num="7">7</button>
+                    <button type="button" class="button num_button" data-num="8">8</button>
+                    <button type="button" class="button num_button" data-num="9">9</button>
+                    <button type="button" class="button_light operatorBtn" data-math="*">×</button>
+                </div>
+                <div class="col-12 d-flex flex-row">
+                    <button type="button" class="button num_button" data-num="4">4</button>
+                    <button type="button" class="button num_button" data-num="5">5</button>
+                    <button type="button" class="button num_button" data-num="6">6</button>
+                    <button type="button" class="button_light operatorBtn" data-math="-">-</button>
+                </div>
+                <div class="col-12 d-flex flex-row">
+                    <button type="button" class="button num_button" data-num="1">1</button>
+                    <button type="button" class="button num_button" data-num="2">2</button>
+                    <button type="button" class="button num_button" data-num="3">3</button>
+                    <button type="button" class="button_light  operatorBtn" data-math="+">+</button>
+
+                </div>
+                <div class="col-12 d-flex flex-row">
+                    <button type="button" class="button num_button" data-num="0">0</button>
+                    <button type="button" class="button decimal">.</button>
+                    <button type="button" class="button_equal operatorBtn" data-math="=">=</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+
+    <script>
+        let percent = document.querySelector('.percent');
+        let decimal = document.querySelector('.decimal');
+        let disPlayDetail = document.querySelector('.disPlayDetail');
+        let disPlayresult = document.querySelector('.disPlayresult');
+        let ac = document.querySelector('.ac');
+        let backspace = document.querySelector('.backspace');
+        let num_button = document.querySelectorAll('.num_button');
+        let operatorBtn = document.querySelectorAll('.operatorBtn');
+        let pendingVal;
+        let evalStrAry = [];
+        let evalStrAry_math = [];
+        let displayVal = '0';
+        let btnText;
+
+
+        ac.addEventListener('click', () => {
+            displayVal = '0';
+            pendingVal = undefined;
+            evalStrAry = [];
+            evalStrAry_math = [];
+            disPlayresult.innerText = displayVal;
+            disPlayDetail.innerText = displayVal;
+        }, false);
+
+        backspace.addEventListener('click', () => {
+            let displayVal_length = displayVal.length;
+            displayVal = displayVal.slice(0, displayVal_length - 1);
+            if (displayVal === '') {
+                displayVal = '0';
+            }
+            disPlayresult.innerText = displayVal;
+            disPlayDetail.innerText = displayVal;
+        }, false);
+
+        decimal.addEventListener('click', () => {
+            if (!displayVal.includes('.')) {
+                displayVal += '.';
+            }
+            disPlayresult.innerText = displayVal;
+            disPlayDetail.innerText = displayVal;
+        }, false);
+
+        percent.addEventListener('click', () => {
+            if (displayVal !== '0') {
+                displayVal += '0.0';
+            }
+            disPlayresult.innerText = displayVal;
+            disPlayDetail.innerText = displayVal;
+        }, false);
+
+
+        let updateDisplayVal = (e) => {
+            btnText = e.target.dataset.num;
+            if (displayVal === '0') {
+                displayVal = '';
+                displayVal += btnText;
+            } else {
+                displayVal += btnText;
+            }
+            disPlayresult.innerText = displayVal;
+            disPlayDetail.innerText = displayVal;
+        }
+
+        for (let i = 0; i < num_button.length; i++) {
+            num_button[i].addEventListener('click', updateDisplayVal, false);
+        }
+
+
+        let performOperation = (e) => {
+            let operator = e.target.dataset.math; // 實際運算 ex 6/3
+            let operator_Text = e.target.innerText; //顯示畫面 ex 6÷3
+            if (displayVal && operator !== '=') {
+                pendingVal = displayVal;
+                displayVal = '0';
+                disPlayresult.innerText = displayVal;
+                evalStrAry.push(pendingVal);
+                evalStrAry.push(operator_Text);
+                evalStrAry_math.push(pendingVal);
+                evalStrAry_math.push(operator);
+
+                let evaluation = evalStrAry.join(' ');
+                let evaluation_list = evalStrAry.join(' ');
+                disPlayDetail.innerText = evaluation_list;
+
+            } else {
+                evalStrAry_math.push(displayVal);
+                evalStrAry.push(displayVal);
+
+                let evaluation = evalStrAry.join(' ');
+                let evaluation_list = evalStrAry.join(' ');
+
+                let evaluation_math = eval(evalStrAry_math.join(' '));
+                let evaluation_math_list = eval(evalStrAry_math).join(' ');
+
+                disPlayresult.innerText = evaluation_math;
+                disPlayDetail.innerText = evaluation_list;
+
+                displayVal = '0';
+                evalStrAry = [];
+                evalStrAry_math = [];
+            }
+        }
+
+        for (let i = 0; i < operatorBtn.length; i++) {
+            operatorBtn[i].addEventListener('click', performOperation, false);
+        }
+    </script>
+
+</body>
+
+</html>

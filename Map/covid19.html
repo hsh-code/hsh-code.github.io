@@ -168,38 +168,6 @@
                 navigator.geolocation.watchPosition(res, rej);
             });
         }
-        getPosition().then(result => {
-            x = result.coords.latitude;
-            y = result.coords.longitude;
-            console.log(x, y)
-            //1.初始化地圖
-            var map = L.map('map').setView([x, y], 10);
-            // var map = L.map('map', {
-            //     center: [x, y],
-            //     zoom: 10
-            // });
-
-            // 2.設定圖資來源
-            var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-            var osm = new L.TileLayer(osmUrl, { minZoom: 8, maxZoom: 19 });
-            map.addLayer(osm);
-
-            //2.2 加 icon
-            var myIcon = L.Icon.extend({
-                options: {
-                    iconUrl: './stretching-exercises.png',
-                    iconSize: [30, 30],
-                    iconAnchor: [15, 15],
-                    popupAnchor: [0, -15]
-                }
-            });
-            var locationIcon = new myIcon({ iconUrl: './jumping-dancer.png' })
-            L.icon = function (options) { return new L.Icon(options) }
-
-            L.marker([x, y], {
-                draggable: true,
-                icon: locationIcon
-            }).addTo(map).bindPopup("媽我在這!");
 
         //3.抓資料來源(Axios)
         //台灣行政區域資料
@@ -216,6 +184,7 @@
 
         let countrySelect = document.querySelector('#country');
         let districtSelect = document.querySelector('#district');
+        var map;
 
         function setMarker() {
             if (markers) markers.clearLayers(); //清空markers
@@ -369,81 +338,114 @@
         }
 
         window.onload = function () {
-            //alert('請允許定位您目前的位置方可使用，若下拉選單仍無法使用，請重新整理頁面一次，謝謝')
-            Promise.all([areaDataRequest, virusDataRequest])
-                .then(res => {
-                    let [areaRes, virusRes] = res;
-                    areaData = areaRes.data;
-                    virusData = virusRes.data.filter(x => x.個案研判日.includes('2021'));
-                    //console.log(areaData)
-                    //console.log(virusData)
+            getPosition().then(result => {
+                x = result.coords.latitude;
+                y = result.coords.longitude;
+                console.log(x, y)
+                //1.初始化地圖
+                map = L.map('map').setView([x, y], 10);
+                // var map = L.map('map', {
+                //     center: [x, y],
+                //     zoom: 10
+                // });
 
-                    sickAreaData = virusData.map(x => {
-                        let area = areaData.find(y => y.City == x.縣市.replace('台', '臺') && y.District == x.鄉鎮);
-                        return {
-                            CountryTown: x.縣市 + x.鄉鎮,
-                            Country: x.縣市,
-                            Town: x.鄉鎮,
-                            Month: x.個案研判日.split('/')[1],
-                            Date: x.個案研判日.split('/')[2],
-                            Sex: x.性別,
-                            AgeRange: x.年齡層,
-                            CaseNum: x.確定病例數,
-                            abroad: x.是否為境外移入,
-                            //小防呆
-                            Lat: area != undefined ? area.Lat : undefined,
-                            Lng: area != undefined ? area.Lng : undefined
-                        }
-                    }).filter(x => x.Lat != undefined).groupBy('CountryTown');
-                    //console.log(sickAreaData)
-                    setMarker();
+                // 2.設定圖資來源
+                var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+                var osm = new L.TileLayer(osmUrl, { minZoom: 8, maxZoom: 19 });
+                map.addLayer(osm);
 
-                    //下拉選單
-                    ['---請選擇縣市---'].concat([...new Set(areaData.map(x => x.City))]).forEach(city => {
-                        let option1 = document.createElement('option');
-                        option1.innerText = city;
-                        option1.value = city;
-                        countrySelect.appendChild(option1);
+                //2.2 加 icon
+                var myIcon = L.Icon.extend({
+                    options: {
+                        iconUrl: './stretching-exercises.png',
+                        iconSize: [30, 30],
+                        iconAnchor: [15, 15],
+                        popupAnchor: [0, -15]
+                    }
+                });
+                var locationIcon = new myIcon({ iconUrl: './jumping-dancer.png' })
+                L.icon = function (options) { return new L.Icon(options) }
+
+                L.marker([x, y], {
+                    draggable: true,
+                    icon: locationIcon
+                }).addTo(map).bindPopup("媽我在這!");
+
+                //alert('請允許定位您目前的位置方可使用，若下拉選單仍無法使用，請重新整理頁面一次，謝謝')
+                Promise.all([areaDataRequest, virusDataRequest])
+                    .then(res => {
+                        let [areaRes, virusRes] = res;
+                        areaData = areaRes.data;
+                        virusData = virusRes.data.filter(x => x.個案研判日.includes('2021'));
+                        //console.log(areaData)
+                        //console.log(virusData)
+
+                        sickAreaData = virusData.map(x => {
+                            let area = areaData.find(y => y.City == x.縣市.replace('台', '臺') && y.District == x.鄉鎮);
+                            return {
+                                CountryTown: x.縣市 + x.鄉鎮,
+                                Country: x.縣市,
+                                Town: x.鄉鎮,
+                                Month: x.個案研判日.split('/')[1],
+                                Date: x.個案研判日.split('/')[2],
+                                Sex: x.性別,
+                                AgeRange: x.年齡層,
+                                CaseNum: x.確定病例數,
+                                abroad: x.是否為境外移入,
+                                //小防呆
+                                Lat: area != undefined ? area.Lat : undefined,
+                                Lng: area != undefined ? area.Lng : undefined
+                            }
+                        }).filter(x => x.Lat != undefined).groupBy('CountryTown');
+                        //console.log(sickAreaData)
+                        setMarker();
+
+                        //下拉選單
+                        ['---請選擇縣市---'].concat([...new Set(areaData.map(x => x.City))]).forEach(city => {
+                            let option1 = document.createElement('option');
+                            option1.innerText = city;
+                            option1.value = city;
+                            countrySelect.appendChild(option1);
+                        })
+                        let option2 = document.createElement('option');
+                        option2.value = '';
+                        option2.innerText = '---請選擇行政區---';
+                        districtSelect.appendChild(option2);
                     })
-                    let option2 = document.createElement('option');
-                    option2.value = '';
-                    option2.innerText = '---請選擇行政區---';
-                    districtSelect.appendChild(option2);
-                })
-        }
-        countrySelect.onchange = function () {
-            //console.log(countrySelect.selectedOptions[0]);
+            })
+            countrySelect.onchange = function () {
+                //console.log(countrySelect.selectedOptions[0]);
 
-            if (countrySelect.value == '') { return }
-            else {
-                //改變地圖焦點
-                let country = areaData.find(x => x.City == this.value);
-                //console.log(this.value)
-                map.setView([country.Lat, country.Lng]);
+                if (countrySelect.value == '') { return }
+                else {
+                    //改變地圖焦點
+                    let country = areaData.find(x => x.City == this.value);
+                    //console.log(this.value)
+                    map.setView([country.Lat, country.Lng]);
 
-                districtSelect.innerHTML = '';
-                let label = document.createElement('option');
-                label.value = '';
-                label.innerText = '---請選擇行政區---';
-                districtSelect.appendChild(label);
+                    districtSelect.innerHTML = '';
+                    let label = document.createElement('option');
+                    label.value = '';
+                    label.innerText = '---請選擇行政區---';
+                    districtSelect.appendChild(label);
 
-                let districts = areaData.filter(x => x.City == countrySelect.selectedOptions[0].innerText);
-                districts.forEach(_distr => {
-                    // console.log(district.District)
-                    let option2 = document.createElement('option');
-                    option2.value = '';
-                    option2.innerText = _distr.District;
-                    districtSelect.appendChild(option2);
-                })
+                    let districts = areaData.filter(x => x.City == countrySelect.selectedOptions[0].innerText);
+                    districts.forEach(_distr => {
+                        // console.log(district.District)
+                        let option2 = document.createElement('option');
+                        option2.value = '';
+                        option2.innerText = _distr.District;
+                        districtSelect.appendChild(option2);
+                    })
 
-                districtSelect.onchange = function () {
-                    let location = areaData.find(x => x.District == districtSelect.selectedOptions[0].innerText && x.City == countrySelect.selectedOptions[0].innerText);
-                    //console.log(location)
-                    map.setView([location.Lat, location.Lng], 12)
+                    districtSelect.onchange = function () {
+                        let location = areaData.find(x => x.District == districtSelect.selectedOptions[0].innerText && x.City == countrySelect.selectedOptions[0].innerText);
+                        //console.log(location)
+                        map.setView([location.Lat, location.Lng], 12)
+                    }
                 }
-            }
-        };
-        })
+            };
+        }
         //array groupby方法註冊
         Array.prototype.groupBy = function (prop) {
             return this.reduce(function (groups, item) {

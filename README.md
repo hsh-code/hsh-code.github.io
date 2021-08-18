@@ -11,4 +11,5 @@ Here is my skill:
   * ASS
 * JavaScript
 * SQL
+  * T-SQL
   * ORM

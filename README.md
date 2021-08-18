@@ -5,10 +5,10 @@
 >> _from BuildSchool_
 ---
 Here is my skill:
-*   HTML
-  HTML5
-*   CSS
-  *SASS
-*   JavaScript
-*   SQL
-  *ORM
+* HTML
+  +HTML5
+* CSS
+  +SASS
+* JavaScript
+* SQL
+  +ORM

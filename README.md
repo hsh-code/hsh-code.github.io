@@ -6,9 +6,9 @@
 ---
 Here is my skill:
 *   HTML
-        -HTML5
+        *HTML5
 *   CSS
-        -SASS
+        *SASS
 *   JavaScript
 *   SQL
-        -ORM
+        *ORM

@@ -7,8 +7,8 @@
 Here is my skill:
 * HTML
   * HTML5
-* CSS
-  *SASS
+* CSSS
+  * ASS
 * JavaScript
 * SQL
-  *ORM
+  * ORM

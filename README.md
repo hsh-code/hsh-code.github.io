@@ -6,8 +6,7 @@
 ---
 Here is my skill:
 * HTML
-  * 666 
-   *HTML5
+ * HTML5
 * CSS
   *SASS
 * JavaScript
